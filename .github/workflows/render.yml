@@ -1,0 +1,81 @@
+name: render
+
+# 안온 제작 공장 — jobs/ 에 일감이 올라오면 카드·릴스·목소리를 만들어 GitHub Pages로 공개한다.
+on:
+  push:
+    branches: [main]
+    paths: ['jobs/**', 'factory/**']
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: '특정 job id만 (띄어쓰기로 여러 개, 비우면 전부)'
+        required: false
+        default: ''
+  schedule:
+    - cron: '23 */3 * * *'   # 놓친 일감 보충(3시간마다)
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: factory
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 지난 결과(media 브랜치) 가져오기
+        run: |
+          if git ls-remote --exit-code --heads origin media >/dev/null; then
+            git clone --depth 1 --branch media "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" _media
+          else
+            mkdir -p _media && cd _media && git init -b media && git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 도구 설치(크롬·ffmpeg·한글 글꼴)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-cjk >/dev/null
+          pip install -q -r factory/requirements.txt
+          python -m playwright install --with-deps chromium >/dev/null
+
+      - name: 만들기
+        env:
+          FACTORY_OUT: _media
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python factory/factory.py ${{ inputs.ids }}
+
+      - name: 결과 저장(media 브랜치, 한 커밋으로 덮어쓰기)
+        id: save
+        run: |
+          cd _media
+          touch .nojekyll
+          git config user.name "anon-factory"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -z "$(git status --porcelain)" ]; then echo "changed=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git checkout -q --orphan next
+          git add -A
+          git commit -qm "media $(date -u +%FT%TZ)"
+          git push -qf origin next:media
+          echo "changed=yes" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/configure-pages@v5
+        if: steps.save.outputs.changed == 'yes'
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.save.outputs.changed == 'yes'
+        with:
+          path: _media
+      - uses: actions/deploy-pages@v4
+        if: steps.save.outputs.changed == 'yes'
