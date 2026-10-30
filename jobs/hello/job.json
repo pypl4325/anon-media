@@ -1,0 +1,15 @@
+{
+ "id": "hello",
+ "rev": 1,
+ "kind": "render",
+ "note": "공장 첫 시험(카드 1장 + 4초 릴스). 지워도 됨",
+ "cards": [
+  {
+   "name": "01",
+   "file": "card1.html"
+  }
+ ],
+ "reel": {
+  "file": "reel.html"
+ }
+}
