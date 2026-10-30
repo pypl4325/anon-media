@@ -193,11 +193,13 @@ def audio_tracks(html, job):
         def attr(n, d):
             x = re.search(rf'\b{n}="([^"]*)"', tag)
             return float(x.group(1)) if x and x.group(1) != "" else d
-        tracks.append({"src": src.group(1), "start": attr("data-start", 0.0),
+        tid = re.search(r'\bid="([^"]*)"', tag)
+        loop = bool(re.search(r"\bdata-loop\b", tag)) or ("bgm" in (tid.group(1).lower() if tid else ""))
+        tracks.append({"src": src.group(1), "start": attr("data-start", 0.0), "loop": loop,
                        "duration": attr("data-duration", 0.0), "volume": attr("data-volume", 1.0)})
     for t in job.get("reel", {}).get("audio", []) or []:  # html 밖에서 따로 줄 수도 있음
         tracks.append({"src": t["url"], "start": float(t.get("start", 0)), "duration": float(t.get("duration", 0)),
-                       "volume": float(t.get("volume", 1))})
+                       "volume": float(t.get("volume", 1)), "loop": bool(t.get("loop"))})
     return tracks
 
 
@@ -235,7 +237,8 @@ def render_reel(br, job, job_dir, out_dir, tmpdir):
             p = download(t["src"], os.path.join(tmpdir, f"a{k}" + os.path.splitext(t["src"].split("?")[0])[1][:5]))
             ins += ["-i", p]
             d = t["duration"] or dur
-            loop = "aloop=loop=-1:size=2147483647," if t["duration"] and t["duration"] > probe_duration(p) + 0.05 else ""
+            # 배경음만 반복(목소리는 data-duration이 파일보다 길어도 반복하지 않고 뒤를 무음으로)
+            loop = "aloop=loop=-1:size=2147483647," if t["loop"] and t["duration"] and t["duration"] > probe_duration(p) + 0.05 else ""
             fl.append(f"[{k + 1}:a]{loop}atrim=0:{d:.3f},asetpts=N/SR/TB,volume={t['volume']},adelay={int(t['start'] * 1000)}:all=1[a{k}]")
         mix = "".join(f"[a{k}]" for k in range(len(tracks)))
         fc = ";".join(fl) + f";{mix}amix=inputs={len(tracks)}:duration=longest:normalize=0,apad,atrim=0:{dur:.3f}[aout]"
