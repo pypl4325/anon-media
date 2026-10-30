@@ -1,0 +1,26 @@
+{
+ "id": "hello",
+ "rev": 1,
+ "kind": "render",
+ "status": "done",
+ "startedAt": "2026-10-30T22:54:41+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "cards": [
+  "https://pypl4325.github.io/anon-media/out/hello/r1/card_01.png"
+ ],
+ "thumbs": [
+  "https://pypl4325.github.io/anon-media/out/hello/r1/card_01_720.jpg"
+ ],
+ "cardsSheet": "https://pypl4325.github.io/anon-media/out/hello/r1/cards_sheet.jpg",
+ "reel": {
+  "url": "https://pypl4325.github.io/anon-media/out/hello/r1/reel.mp4",
+  "sec": 4.0,
+  "bytes": 156714,
+  "sheet": "https://pypl4325.github.io/anon-media/out/hello/r1/reel_sheet.jpg",
+  "renderSec": 8
+ },
+ "doneAt": "2026-10-30T22:54:51+09:00",
+ "sec": 10
+}
