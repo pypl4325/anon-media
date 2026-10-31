@@ -5,7 +5,7 @@
 
 - 결과 기록: `media` 브랜치 `results/<id>.json` (작업 공간은 `https://raw.githubusercontent.com/pypl4325/anon-media/media/results/<id>.json` 으로 확인)
 - 공개 주소(링크팜·쓰레드에 줌): `https://pypl4325.github.io/anon-media/out/<id>/r<rev>/...`
-- 같은 job은 `rev`를 올려야 다시 만든다. 21일 지난 결과물은 자동 정리.
+- 같은 job은 `rev`를 올려야 다시 만든다. 35일 지난 결과물은 자동 정리.
 - 키·토큰은 저장소 Secrets(`ELEVENLABS_API_KEY`)로만 받는다. 파일·기록에 쓰지 않는다.
 
 ## job.json
@@ -18,7 +18,7 @@
  "reel": {"file": "reel.html", "size": [1080, 1920], "fps": 30}}
 ```
 - 카드: HTML 그대로 1080×1350 스크린샷 + 720×900 JPG + 한눈 시트(`cards_sheet.jpg`). `{{key}}`는 `vars`로 채움(남으면 오류).
-- 릴스: `window.__timelines`(GSAP, paused)를 프레임마다 seek해 30fps로 찍고, `<audio src data-volume data-start data-duration>` 태그(목소리 1.0·배경음 0.16)를 ffmpeg로 섞는다. 길이는 타임라인 길이(또는 `reel.duration`). 검수용 `reel_sheet.jpg`(6장면).
+- 릴스: `window.__timelines`(GSAP, paused)를 프레임마다 seek해 30fps로 찍고, `<audio src data-volume data-start data-duration>` 태그(목소리 1.0·배경음 0.16)를 ffmpeg로 섞는다. 배경음(id에 bgm 또는 data-loop)만 반복한다. 길이는 타임라인 길이(또는 `reel.duration`). 검수용 `reel_sheet.jpg`(6장면).
 
 ```json
 {"id": "v040", "rev": 1, "kind": "voice",

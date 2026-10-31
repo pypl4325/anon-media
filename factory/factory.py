@@ -397,8 +397,8 @@ def process(job_path, br):
     return res
 
 
-def prune(days=21):
-    """21일 넘은 out/ 폴더는 지운다(media 브랜치는 매번 한 커밋으로 덮어써서 저장소가 커지지 않게)."""
+def prune(days=35):
+    """35일 넘은 out/ 폴더는 지운다(media 브랜치는 매번 한 커밋으로 덮어써서 저장소가 커지지 않게)."""
     cut = dt.datetime.now(KST) - dt.timedelta(days=days)
     for d in glob.glob(os.path.join(WORK, "out", "*")):
         r = os.path.join(WORK, "results", os.path.basename(d) + ".json")
