@@ -6,6 +6,7 @@
   - kind "voice" : 일레븐랩스 API로 목소리 MP3 + 글자별 시간표(alignment)
   - kind "voices": 일레븐랩스 계정의 목소리 이름·ID 목록
   - kind "bank"  : 생성 이미지(7일 뒤 사라지는 주소)를 bank/ 에 영구 보관
+  - kind "cardreel": 카드 이미지 주소들 → 9:16 카드 슬라이드 릴스(배경음). render 작업에 "cardReel":{...}을 주면 카드와 함께 만든다
 를 만들어 out/<id>/r<rev>/ 와 results/<id>.json 에 쓴다(media 브랜치). 공개 주소는 GitHub Pages.
 
 같은 job은 rev가 바뀔 때만 다시 만든다. 토큰·키는 환경 변수로만 받고 파일·기록에 쓰지 않는다.
@@ -249,18 +250,74 @@ def render_reel(br, job, job_dir, out_dir, tmpdir):
         warn.append("reel: 소리 없음(<audio> 태그 없음)")
         run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-c", "copy", "-movflags", "+faststart", final])
 
-    # 검수용 장면 시트(6장)
-    sheet = os.path.join(out_dir, "reel_sheet.jpg")
-    pts = [dur * k / 6 + 0.4 for k in range(6)]
+    sheet = video_sheet(final, dur, os.path.join(out_dir, "reel_sheet.jpg"), tmpdir)
+    return final, sheet, dur, warn, round(time.time() - t0)
+
+
+def video_sheet(video, dur, sheet, tmpdir, n=6):
+    """검수용 장면 시트(6장을 가로로)"""
     frames = []
-    for k, t in enumerate(pts):
-        f = os.path.join(tmpdir, f"q{k}.jpg")
-        run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{min(t, dur - 0.1):.2f}", "-i", final, "-frames:v", "1",
+    for k in range(n):
+        t = dur * k / n + 0.4
+        f = os.path.join(tmpdir, f"q{k}_{os.path.basename(sheet)}.jpg")
+        run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{min(t, dur - 0.1):.2f}", "-i", video, "-frames:v", "1",
              "-vf", "scale=270:480", f])
         frames.append(f)
     run(["ffmpeg", "-y", "-loglevel", "error", *sum([["-i", f] for f in frames], []), "-filter_complex",
-         "".join(f"[{k}:v]" for k in range(6)) + "hstack=inputs=6[o]", "-map", "[o]", "-q:v", "4", sheet])
-    return final, sheet, dur, warn, round(time.time() - t0)
+         "".join(f"[{k}:v]" for k in range(n)) + f"hstack=inputs={n}[o]", "-map", "[o]", "-q:v", "4", sheet])
+    return sheet
+
+
+# ---------------- 카드 슬라이드 릴스(11/5, G3) ----------------
+def card_reel(images, out_path, tmpdir, opt=None):
+    """카드 이미지(1080×1350) 여러 장 → 1080×1920 30fps 슬라이드 영상 + 배경음.
+    뒤는 같은 카드를 흐리게 깔고, 앞 카드는 천천히 살짝 다가온다. 장 사이는 0.25초 밀기 전환.
+    opt: {"sec": 2.6, "first": 3.2, "last": 3.6, "bgm": 주소, "volume": 0.3, "transition": "slideleft", "crf": 23}"""
+    opt = opt or {}
+    sec, first, last = float(opt.get("sec", 2.6)), float(opt.get("first", 3.2)), float(opt.get("last", 3.6))
+    tr = float(opt.get("transitionSec", 0.25))
+    trans = opt.get("transition", "slideleft")
+    crf = str(opt.get("crf", 23))
+    segs, durs = [], []
+    for k, img in enumerate(images):
+        d = first if k == 0 else (last if k == len(images) - 1 else sec)
+        d += tr if k < len(images) - 1 else 0
+        seg = os.path.join(tmpdir, f"cr{k}.mp4")
+        z = f"(1+0.035*t/{d:.3f})"
+        fc = ("[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=28:4,"
+              "eq=brightness=-0.18:saturation=0.9,setsar=1[bg];"
+              f"[0:v]scale=w='trunc(1000*{z}/2)*2':h='trunc(1250*{z}/2)*2':eval=frame[fg];"
+              "[bg][fg]overlay=x='(W-w)/2':y='(H-h)/2-30':eval=frame,format=yuv420p[o]")
+        run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-framerate", "30", "-t", f"{d:.3f}", "-i", img,
+             "-filter_complex", fc, "-map", "[o]", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", crf, seg])
+        segs.append(seg)
+        durs.append(d)
+    silent = os.path.join(tmpdir, "cardreel_silent.mp4")
+    if len(segs) == 1:
+        shutil.copy(segs[0], silent)
+        total = durs[0]
+    else:
+        ins = sum([["-i", p] for p in segs], [])
+        fl, prev, off = [], "[0:v]", 0.0
+        for k in range(1, len(segs)):
+            off += durs[k - 1] - tr
+            lab = f"[x{k}]" if k < len(segs) - 1 else "[o]"
+            fl.append(f"{prev}[{k}:v]xfade=transition={trans}:duration={tr}:offset={off:.3f}{lab}")
+            prev = lab
+        total = off + durs[-1]
+        run(["ffmpeg", "-y", "-loglevel", "error", *ins, "-filter_complex", ";".join(fl), "-map", "[o]",
+             "-c:v", "libx264", "-preset", "medium", "-crf", crf, "-pix_fmt", "yuv420p", "-r", "30", silent])
+    bgm = opt.get("bgm")
+    if bgm:
+        a = download(bgm, os.path.join(tmpdir, "cr_bgm" + (os.path.splitext(bgm.split("?")[0])[1][:5] or ".mp3")))
+        vol = float(opt.get("volume", 0.3))
+        fc = (f"[1:a]aloop=loop=-1:size=2147483647,atrim=0:{total:.3f},asetpts=N/SR/TB,volume={vol},"
+              f"afade=t=in:d=0.3,afade=t=out:st={max(total - 1.2, 0):.3f}:d=1.2[a]")
+        run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", a, "-filter_complex", fc, "-map", "0:v", "-map", "[a]",
+             "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-shortest", "-movflags", "+faststart", out_path])
+    else:
+        run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-c", "copy", "-movflags", "+faststart", out_path])
+    return out_path, probe_duration(out_path)
 
 
 # ---------------- 목소리(일레븐랩스) ----------------
@@ -438,6 +495,14 @@ def process(job_path, br):
                                 "words": words, "alignment": al}
             elif job.get("kind") == "voices":
                 res["voices"] = el_voices()
+            elif job.get("kind") == "cardreel":  # 이미 만든 카드 이미지 주소로 슬라이드 릴스만
+                imgs = [download(u, os.path.join(tmp, f"cri{k}" + (os.path.splitext(u.split("?")[0])[1][:5] or ".png")))
+                        for k, u in enumerate(job.get("images") or [])]
+                if not imgs:
+                    raise RuntimeError("images(카드 이미지 주소) 필요")
+                cr, crsec = card_reel(imgs, os.path.join(out_dir, "card_reel.mp4"), tmp, job.get("cardReel") or {})
+                res["cardReel"] = {"url": rel_url(cr), "sec": round(crsec, 2), "bytes": os.path.getsize(cr),
+                                   "sheet": rel_url(video_sheet(cr, crsec, os.path.join(out_dir, "card_reel_sheet.jpg"), tmp))}
             elif job.get("kind") == "bank":
                 got, w = bank_images(job, tmp)
                 res["bank"] = got
@@ -452,6 +517,10 @@ def process(job_path, br):
                     res["thumbs"] = [rel_url(p) for p in thumbs]
                     res["cardsSheet"] = rel_url(sheet) if sheet else None
                     res["warn"] += w
+                if job.get("cards") and job.get("cardReel"):
+                    cr, crsec = card_reel(cards, os.path.join(out_dir, "card_reel.mp4"), tmp, job["cardReel"])
+                    res["cardReel"] = {"url": rel_url(cr), "sec": round(crsec, 2), "bytes": os.path.getsize(cr),
+                                       "sheet": rel_url(video_sheet(cr, crsec, os.path.join(out_dir, "card_reel_sheet.jpg"), tmp))}
                 if job.get("reel"):
                     mp4, sheet, dur, w, rsec = render_reel(br, job, job_dir, out_dir, tmp)
                     res["reel"] = {"url": rel_url(mp4), "sec": round(dur, 2), "bytes": os.path.getsize(mp4),

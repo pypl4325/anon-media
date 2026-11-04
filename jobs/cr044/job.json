@@ -1,0 +1,19 @@
+{
+ "id": "cr044",
+ "rev": 1,
+ "kind": "cardreel",
+ "images": [
+  "https://cdn.creativeclaw.co/u/3646c293/images/fd3e1ea8-f76d-40c7-a08c-ff53f9337253.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/e81bc0cd-a6d7-4334-b795-03f44195623b.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/56eef376-44a6-4c74-8bce-72180929874f.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/c691695a-5251-4027-a214-d3d4cdf7ecd9.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/1fcd05fe-a39b-4337-873f-555cf364b236.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/a62f4cc7-2757-45d9-812b-81d22d9d3b28.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/a7589b1f-27d8-4519-b6dc-a4bb620fade0.png",
+  "https://cdn.creativeclaw.co/u/3646c293/images/cc21f279-c011-4962-9105-9b4179a5f4bd.png"
+ ],
+ "cardReel": {
+  "bgm": "https://pypl4325.github.io/anon-media/bank/bgm-series.mp3",
+  "volume": 0.3
+ }
+}

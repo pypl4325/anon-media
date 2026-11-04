@@ -38,5 +38,11 @@
 - 전체 목록: `bank/index.json` (`items{name:{url,thumb,w,h,tags,prompt,source,job,at}}`). 같은 이름은 `replace:true`일 때만 덮어씀.
 - 릴스 화질: `reel.crf`(기본 23, 숫자가 작을수록 고화질·큰 파일).
 
+```json
+{"id": "cr044", "rev": 1, "kind": "cardreel", "images": ["카드1 주소", "카드2 주소"],
+ "cardReel": {"bgm": "https://pypl4325.github.io/anon-media/bank/bgm-series.mp3", "volume": 0.3, "sec": 2.6, "first": 3.2, "last": 3.6}}
+```
+- 카드 슬라이드 릴스(11/5): 카드(1080×1350)를 흐린 배경 위에 올려 1080×1920·30fps로, 장마다 2.6초(첫 장 3.2·끝 장 3.6) 천천히 다가오며 0.25초 밀기 전환 + 배경음 → `card_reel.mp4`·`card_reel_sheet.jpg`. render 작업에 `"cardReel": {...}`를 넣으면 만든 카드로 함께 만든다.
+
 ## results/<id>.json
-`status`(done/error) · `cards[]` · `thumbs[]` · `cardsSheet` · `reel{url,sec,bytes,sheet}` · `voice{url,sec,model,voice_id,words}` · `voices[]` · `bank[]` · `bankIndex` · `warn[]`(못 불러온 이미지 등) · `error` · `pagesBase` · `rawBase`
+`status`(done/error) · `cards[]` · `thumbs[]` · `cardsSheet` · `reel{url,sec,bytes,sheet}` · `voice{url,sec,model,voice_id,words}` · `voices[]` · `bank[]` · `bankIndex` · `cardReel{url,sec,bytes,sheet}` · `warn[]`(못 불러온 이미지 등) · `error` · `pagesBase` · `rawBase`
