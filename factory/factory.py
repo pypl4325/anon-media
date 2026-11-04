@@ -5,6 +5,7 @@
   - kind "render": 카드 HTML → PNG(+720×900 축소본), 릴스 HTML(GSAP 타임라인) → 프레임 렌더 → MP4(+목소리·배경음)
   - kind "voice" : 일레븐랩스 API로 목소리 MP3 + 글자별 시간표(alignment)
   - kind "voices": 일레븐랩스 계정의 목소리 이름·ID 목록
+  - kind "bank"  : 생성 이미지(7일 뒤 사라지는 주소)를 bank/ 에 영구 보관
 를 만들어 out/<id>/r<rev>/ 와 results/<id>.json 에 쓴다(media 브랜치). 공개 주소는 GitHub Pages.
 
 같은 job은 rev가 바뀔 때만 다시 만든다. 토큰·키는 환경 변수로만 받고 파일·기록에 쓰지 않는다.
@@ -215,7 +216,7 @@ def render_reel(br, job, job_dir, out_dir, tmpdir):
     n = int(round(dur * fps))
     silent = os.path.join(tmpdir, "video.mp4")
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(fps), "-c:v", "mjpeg",
-                           "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p",
+                           "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", str(spec.get("crf") or 23), "-pix_fmt", "yuv420p",
                            "-r", str(fps), silent], stdin=subprocess.PIPE)
     t0 = time.time()
     for i in range(n):
@@ -248,7 +249,7 @@ def render_reel(br, job, job_dir, out_dir, tmpdir):
         warn.append("reel: 소리 없음(<audio> 태그 없음)")
         run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-c", "copy", "-movflags", "+faststart", final])
 
-    # 검수용 장면 시트(6장) — Creative Claw extract_frames 대신
+    # 검수용 장면 시트(6장)
     sheet = os.path.join(out_dir, "reel_sheet.jpg")
     pts = [dur * k / 6 + 0.4 for k in range(6)]
     frames = []
@@ -344,6 +345,50 @@ def make_voice(job, out_dir):
     return mp3, probe_duration(mp3), {"characters": chars, "starts": starts, "ends": ends}, words, used, vid
 
 
+# ---------------- 이미지 보관함(bank) ----------------
+SAFE = re.compile(r"[^0-9A-Za-z._-]+")
+
+
+def bank_images(job, tmpdir):
+    """링크팜 등에서 만든 이미지(7일 뒤 사라지는 주소)를 bank/ 에 영구 보관한다. 35일 정리 대상이 아님.
+    images: [{"name": "protein-kitchen-01", "url": "https://...", "tags": ["단백질", "부엌"], "prompt": "...", "replace": false}]
+    → bank/<name>.jpg(원본 크기, 고화질 JPG) + bank/<name>_540.jpg(검수·카드 미리보기) + bank/index.json(전체 목록)"""
+    bdir = os.path.join(WORK, "bank")
+    os.makedirs(bdir, exist_ok=True)
+    idx_path = os.path.join(bdir, "index.json")
+    index = json.load(open(idx_path, encoding="utf-8")) if os.path.exists(idx_path) else {"items": {}}
+    items = index.setdefault("items", {})
+    got, warn = [], []
+    for k, im in enumerate(job.get("images") or []):
+        name = SAFE.sub("-", str(im.get("name") or f"{job['id']}-{k + 1:02d}")).strip("-")[:80]
+        full = os.path.join(bdir, f"{name}.jpg")
+        thumb = os.path.join(bdir, f"{name}_540.jpg")
+        if os.path.exists(full) and not im.get("replace"):
+            warn.append(f"{name}: 이미 있어 그대로 둠(replace:true면 덮어씀)")
+        else:
+            try:
+                src = download(im["url"], os.path.join(tmpdir, f"b{k}" + (os.path.splitext(im["url"].split("?")[0])[1][:5] or ".img")))
+                run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-frames:v", "1", "-q:v", "2", full])
+                run(["ffmpeg", "-y", "-loglevel", "error", "-i", full, "-vf", "scale=540:-2", "-q:v", "4", thumb])
+            except Exception as e:  # noqa: BLE001
+                warn.append(f"{name}: 실패 {scrub(e)[:200]}")
+                continue
+        w, h = (run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                     "-of", "csv=p=0", full]).strip().split(",") + ["0", "0"])[:2]
+        rec = {**(items.get(name) or {}), "name": name, "url": rel_url(full), "thumb": rel_url(thumb),
+               "w": int(w or 0), "h": int(h or 0), "bytes": os.path.getsize(full),
+               "tags": im.get("tags") or (items.get(name) or {}).get("tags") or [],
+               "prompt": (im.get("prompt") or (items.get(name) or {}).get("prompt") or "")[:500],
+               "source": im.get("source") or (items.get(name) or {}).get("source") or "",
+               "job": str(job["id"]), "at": (items.get(name) or {}).get("at") or now()}
+        items[name] = rec
+        got.append(rec)
+    index["updatedAt"] = now()
+    index["count"] = len(items)
+    json.dump(index, open(idx_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return got, warn
+
+
 # ---------------- 실행 ----------------
 def rel_url(path):
     """링크팜·쓰레드에 주는 공개 주소(GitHub Pages). 작업 공간 확인용 raw 주소는 rawBase로 바꿔 쓴다."""
@@ -373,6 +418,13 @@ def process(job_path, br):
                                 "words": words, "alignment": al}
             elif job.get("kind") == "voices":
                 res["voices"] = el_voices()
+            elif job.get("kind") == "bank":
+                got, w = bank_images(job, tmp)
+                res["bank"] = got
+                res["bankIndex"] = f"{PAGES}/bank/index.json"
+                res["warn"] += w
+                if not got:
+                    raise RuntimeError("보관된 이미지 없음 — " + " | ".join(w)[:600])
             else:
                 if job.get("cards"):
                     cards, thumbs, sheet, w = render_cards(br, job, job_dir, out_dir, tmp)
@@ -398,7 +450,8 @@ def process(job_path, br):
 
 
 def prune(days=35):
-    """35일 넘은 out/ 폴더는 지운다(media 브랜치는 매번 한 커밋으로 덮어써서 저장소가 커지지 않게)."""
+    """35일 넘은 out/ 폴더는 지운다(media 브랜치는 매번 한 커밋으로 덮어써서 저장소가 커지지 않게).
+    bank/(이미지 보관함)는 지우지 않는다."""
     cut = dt.datetime.now(KST) - dt.timedelta(days=days)
     for d in glob.glob(os.path.join(WORK, "out", "*")):
         r = os.path.join(WORK, "results", os.path.basename(d) + ".json")

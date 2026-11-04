@@ -5,7 +5,7 @@
 
 - 결과 기록: `media` 브랜치 `results/<id>.json` (작업 공간은 `https://raw.githubusercontent.com/pypl4325/anon-media/media/results/<id>.json` 으로 확인)
 - 공개 주소(링크팜·쓰레드에 줌): `https://pypl4325.github.io/anon-media/out/<id>/r<rev>/...`
-- 같은 job은 `rev`를 올려야 다시 만든다. 35일 지난 결과물은 자동 정리.
+- 같은 job은 `rev`를 올려야 다시 만든다. 35일 지난 결과물(`out/`)은 자동 정리. 이미지 보관함(`bank/`)은 남긴다.
 - 키·토큰은 저장소 Secrets(`ELEVENLABS_API_KEY`)로만 받는다. 파일·기록에 쓰지 않는다.
 
 ## job.json
@@ -29,5 +29,14 @@
 - `voice_name` 대신 `voice_id`를 줘도 된다. 이름으로 주면 대표 계정 목소리 목록에서 찾는다(결과에 voice_id 기록).
 - `{"id": "voices", "rev": 1, "kind": "voices"}` → 결과 `voices[]`에 대표 계정 목소리 이름·ID 목록.
 
+```json
+{"id": "bank-20261104", "rev": 1, "kind": "bank",
+ "images": [{"name": "protein-kitchen-01", "url": "https://linkfarm-generated-content.s3.amazonaws.com/...",
+             "tags": ["단백질", "부엌"], "prompt": "만들 때 쓴 문장", "source": "linkfarm gpt-image-2.5-sunburst low"}]}
+```
+- 이미지 보관함: 7일 뒤 사라지는 생성 이미지 주소를 받아 `bank/<name>.jpg`(원본 크기) + `bank/<name>_540.jpg`로 **영구 보관**(35일 정리 대상 아님).
+- 전체 목록: `bank/index.json` (`items{name:{url,thumb,w,h,tags,prompt,source,job,at}}`). 같은 이름은 `replace:true`일 때만 덮어씀.
+- 릴스 화질: `reel.crf`(기본 23, 숫자가 작을수록 고화질·큰 파일).
+
 ## results/<id>.json
-`status`(done/error) · `cards[]` · `thumbs[]` · `cardsSheet` · `reel{url,sec,bytes,sheet}` · `voice{url,sec,model,voice_id,words}` · `voices[]` · `warn[]`(못 불러온 이미지 등) · `error` · `pagesBase` · `rawBase`
+`status`(done/error) · `cards[]` · `thumbs[]` · `cardsSheet` · `reel{url,sec,bytes,sheet}` · `voice{url,sec,model,voice_id,words}` · `voices[]` · `bank[]` · `bankIndex` · `warn[]`(못 불러온 이미지 등) · `error` · `pagesBase` · `rawBase`

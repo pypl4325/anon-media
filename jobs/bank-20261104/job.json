@@ -1,0 +1,4 @@
+{"id": "bank-20261104", "rev": 1, "kind": "bank",
+ "images": [{"name": "test-linkfarm-01",
+             "url": "https://linkfarm-generated-content.s3.amazonaws.com/generated/e4edf62e-cd51-4d58-a649-ef1743c35227/0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZGFBE7SHPSODT2HQ%2F20261104%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20261104T143933Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c70a600734a435e80ee0d0d2ce428389f699c603f7aab6dbfbb691698144646a",
+             "tags": ["시험"], "source": "linkfarm gpt-image-2.5-sunburst low"}]}
