@@ -361,6 +361,25 @@ def bank_images(job, tmpdir):
     got, warn = [], []
     for k, im in enumerate(job.get("images") or []):
         name = SAFE.sub("-", str(im.get("name") or f"{job['id']}-{k + 1:02d}")).strip("-")[:80]
+        old = items.get(name) or {}
+        ext = os.path.splitext(im["url"].split("?")[0])[1].lower()
+        if im.get("kind") == "audio" or ext in (".mp3", ".m4a", ".wav", ".aac"):  # 배경음 등 소리는 그대로 보관
+            path = os.path.join(bdir, name + (ext if ext in (".mp3", ".m4a", ".wav", ".aac") else ".mp3"))
+            if os.path.exists(path) and not im.get("replace"):
+                warn.append(f"{name}: 이미 있어 그대로 둠(replace:true면 덮어씀)")
+            else:
+                try:
+                    download(im["url"], path)
+                except Exception as e:  # noqa: BLE001
+                    warn.append(f"{name}: 실패 {scrub(e)[:200]}")
+                    continue
+            rec = {**old, "name": name, "kind": "audio", "url": rel_url(path), "sec": round(probe_duration(path), 2),
+                   "bytes": os.path.getsize(path), "tags": im.get("tags") or old.get("tags") or [],
+                   "desc": im.get("desc") or old.get("desc") or "", "source": im.get("source") or old.get("source") or "",
+                   "job": str(job["id"]), "at": old.get("at") or now()}
+            items[name] = rec
+            got.append(rec)
+            continue
         full = os.path.join(bdir, f"{name}.jpg")
         thumb = os.path.join(bdir, f"{name}_540.jpg")
         if os.path.exists(full) and not im.get("replace"):
@@ -375,12 +394,13 @@ def bank_images(job, tmpdir):
                 continue
         w, h = (run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
                      "-of", "csv=p=0", full]).strip().split(",") + ["0", "0"])[:2]
-        rec = {**(items.get(name) or {}), "name": name, "url": rel_url(full), "thumb": rel_url(thumb),
+        rec = {**old, "name": name, "kind": "image", "url": rel_url(full), "thumb": rel_url(thumb),
                "w": int(w or 0), "h": int(h or 0), "bytes": os.path.getsize(full),
-               "tags": im.get("tags") or (items.get(name) or {}).get("tags") or [],
-               "prompt": (im.get("prompt") or (items.get(name) or {}).get("prompt") or "")[:500],
-               "source": im.get("source") or (items.get(name) or {}).get("source") or "",
-               "job": str(job["id"]), "at": (items.get(name) or {}).get("at") or now()}
+               "tags": im.get("tags") or old.get("tags") or [],
+               "desc": im.get("desc") or old.get("desc") or "",
+               "prompt": (im.get("prompt") or old.get("prompt") or "")[:500],
+               "source": im.get("source") or old.get("source") or "",
+               "job": str(job["id"]), "at": old.get("at") or now()}
         items[name] = rec
         got.append(rec)
     index["updatedAt"] = now()
