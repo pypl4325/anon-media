@@ -1,0 +1,160 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FFC83D;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FFC83D}
+.ov{position:absolute;opacity:0;z-index:7}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:40px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FFC83D 55%)}
+#per{left:0;right:0;top:470px;text-align:center}
+#per .a{display:inline-block;background:rgba(0,0,0,.55);border:4px solid #fff;color:#fff;font-weight:900;font-size:110px;padding:10px 40px;border-radius:30px;letter-spacing:-4px}
+#per .ar{display:block;color:#fff;font-size:80px;font-weight:900;margin:10px 0}
+#per .b{display:inline-block;background:#FFC83D;color:#111;font-weight:900;font-size:150px;padding:6px 44px;border-radius:30px;letter-spacing:-6px}
+.wc{position:absolute;top:500px;width:290px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:48px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#FFC83D}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FFC83D;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FFC83D 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FFC83D,#FF9F43,#FFC83D)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FFC83D;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,200,61,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FFC83D;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FFC83D;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.wc{width:420px}
+.wc .w{font-size:44px}
+#share{left:60px;right:60px;top:330px;text-align:center;z-index:9}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#FFC83D;font-weight:800;font-size:44px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+#lab2 .r{font-size:38px}
+#per .b{font-size:140px}
+#pct{left:0;right:0;top:500px;text-align:center;color:#FFC83D;font-weight:900;font-size:200px;letter-spacing:-8px;text-shadow:0 10px 40px rgba(0,0,0,.8)}
+#pct small{display:block;font-size:64px;color:#fff;letter-spacing:-2px}
+*{word-break:keep-all}
+</style></head><body>
+<main id="reel" data-composition-id="r047" data-width="1080" data-height="1920" data-duration="50.0">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-milk-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib088.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-milk-04.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ph-milk-03.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-03.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ph-milk-02.jpg"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ph-sugar-02.jpg"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-02.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ib103.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-06.jpg"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib045.jpg"><div class="shade"></div></div>
+<div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ib047.jpg"><div class="shade"></div></div>
+<div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ph-sugar-01.jpg"><div class="shade"></div></div>
+<div class="top"><div class="badge">저당·제로 식품 상식 8</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="per"><div class="a">2003년 43kcal</div><span class="ar">↓</span><div class="b">60kcal</div></div>
+<div class="ov" id="pct">약 40%↑<small>커피로 먹는 하루 칼로리</small></div>
+<div class="wc on" id="w1" style="left:90px"><div class="w">크리머</div><div class="g">18.5</div></div>
+<div class="wc" id="w2" style="left:570px"><div class="w">설탕</div><div class="g">16</div></div>
+<div class="ov" id="label"><div class="t">영양정보 <span>커피믹스 한 제품 · 1봉 12g</span></div><div class="r">열량 <span class="mk">50kcal</span><br>당류 6g<br>포화지방 1.6g <span class="mk">(하루 기준치 11%)</span></div></div>
+<div class="ov" id="lab2" style="left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)"><div class="t" style="font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px">원재료명 <span style="font-size:30px;font-weight:600;color:#8A8274">예시</span></div><div class="r" style="font-weight:600;color:#4A4438;line-height:1.5">설탕, <span style="font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FFC83D 55%)">식물성크림</span>(올리고당, 식물성경화유지(코코넛 오일), 우유단백…), 커피</div></div>
+<div class="ov" id="share"><span>✈ 커피 달고 사는 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">팔로우하면</div><div class="t"><span>식품 뒷면</span>,<br>매일 하나씩 읽어 드려요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">커피 칼로리,<br><span class='y'>설탕보다 크리머</span>가 더!</div>
+<div class="cap " id="c3">미국 터프츠대가</div>
+<div class="cap sm" id="c4">성인 약 3만 명을 봤더니</div>
+<div class="cap sm" id="c5">커피로 먹는 칼로리</div>
+<div class="cap " id="c6">하루 <span class='y'>43</span>에서</div>
+<div class="cap " id="c7"><span class='y'>60kcal</span>로</div>
+<div class="cap sm" id="c8"><span class='y'>40%</span> 가까이 늘었어요</div>
+<div class="cap sm" id="c9">커피 양은 거의 그대로</div>
+<div class="cap " id="c10">범인은 <span class='y'>크리머</span>!</div>
+<div class="cap " id="c11">크리머 <span class='y'>18.5</span></div>
+<div class="cap " id="c12">설탕은 16kcal</div>
+<div class="cap sm" id="c13">우리 <span class='y'>커피믹스</span>도?</div>
+<div class="cap sm" id="c14">한 제품 뒷면을 보면</div>
+<div class="cap sm" id="c15">한 봉에 <span class='y'>50kcal</span></div>
+<div class="cap " id="c16">포화지방은</div>
+<div class="cap sm" id="c17">하루 기준치의 <span class='y'>11%</span></div>
+<div class="cap " id="c18">원재료의</div>
+<div class="cap sm" id="c19"><span class='y'>'식물성크림'</span>이</div>
+<div class="cap " id="c20">바로 크리머예요</div>
+<div class="cap " id="c21">커피 고를 땐</div>
+<div class="cap " id="c22">뒷면에서</div>
+<div class="cap sm" id="c23"><span class='y'>식물성크림</span>과</div>
+<div class="cap sm" id="c24"><span class='y'>포화지방</span>부터 확인!</div>
+<div class="cap sm endc" id="c25">식품 뒷면 읽는 법,</div>
+<div class="cap sm endc" id="c26">매일 하나씩 올려요</div>
+<div class="cap endc" id="c27">놓치기 싫으면</div>
+<div class="cap sm endc" id="c28">지금 <span class='y'>프로필</span> 눌러서 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://pypl4325.github.io/anon-media/out/v047/r1/voice.mp3" data-start="0" data-duration="50.0" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="50.0" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 4.24], [1, 4.24, 7.84], [2, 7.84, 11.04], [3, 11.04, 14.48], [4, 14.48, 16.88], [5, 16.88, 18.64], [6, 18.64, 22.8], [7, 22.8, 24.88], [8, 24.88, 28.56], [9, 28.56, 32.16], [10, 32.16, 35.52], [11, 35.52, 40.8], [12, 40.8, 50.0]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  if(i===0) tl.set(id,{opacity:1},0); else tl.set(id,{opacity:1},a);
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 4.24], [3, 4.24, 5.68], [4, 5.68, 7.84], [5, 7.84, 9.28], [6, 9.28, 10.64], [7, 10.64, 12.24], [8, 12.24, 14.48], [9, 14.48, 16.88], [10, 16.88, 18.64], [11, 18.64, 20.56], [12, 20.56, 22.8], [13, 22.8, 24.88], [14, 24.88, 26.48], [15, 26.48, 28.56], [16, 28.56, 29.44], [17, 29.44, 32.16], [18, 32.16, 32.8], [19, 32.8, 34.0], [20, 34.0, 35.52], [21, 35.52, 36.52], [22, 36.52, 37.36], [23, 37.36, 38.48], [24, 38.48, 40.8], [25, 40.8, 42.4], [26, 42.4, 44.16], [27, 44.16, 45.2], [28, 45.2, 50.0]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(i===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.fromTo('#per',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(2)'},9.28).set('#per',{autoAlpha:0},12.24);
+tl.fromTo('#pct',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},12.24).set('#pct',{autoAlpha:0},14.48);
+tl.fromTo('#w1',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},19.2);
+tl.fromTo('#w2',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},20.56);
+tl.set(['#w1','#w2'],{autoAlpha:0},22.8);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},25.4).set('#label',{autoAlpha:0},32.16);
+tl.fromTo('#lab2',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},32.16).set('#lab2',{autoAlpha:0},35.52);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},40.8);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3},41.0).to('#share',{autoAlpha:0,duration:0.25},44.0);
+const E=44.16;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.9).to('#tap',{autoAlpha:1,duration:0.15},E+0.9);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.95);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.45);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.5).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.5);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.5);
+tl.to('#tap',{x:465,y:983,duration:0.5,ease:'power2.inOut'},E+2.1);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+2.1);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.7);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.75).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.75);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.8);
+[['#h1',E+2.85],['#h2',E+3.0],['#h3',E+3.15]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+3.6);
+tl.set({},{},50.0);
+window.__timelines=window.__timelines||{};
+window.__timelines.r047=tl;
+</script>
+</body></html>
