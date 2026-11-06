@@ -1,0 +1,160 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FFC83D;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FFC83D}
+.ov{position:absolute;opacity:0;z-index:7}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:40px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FFC83D 55%)}
+.wc{position:absolute;top:500px;width:420px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:44px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#FFC83D}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FFC83D;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FFC83D 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FFC83D,#FF9F43,#FFC83D)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FFC83D;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,200,61,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FFC83D;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FFC83D;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+*{word-break:keep-all}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#FFC83D;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.w{background:#fff}
+.big .n.d{background:#1A1A1A;color:#FFC83D;border:5px solid #FFC83D}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#share{left:60px;right:60px;top:300px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#FFC83D;font-weight:900;font-size:50px;padding:14px 34px;border-radius:999px;letter-spacing:-1.5px}
+</style></head><body>
+<main id="reel" data-composition-id="r049" data-width="1080" data-height="1920" data-duration="49.8">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-05.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib115.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib092.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib033.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib044.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-06.jpg"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib089.jpg"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-04.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-sugar-03.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-sugar-04.jpg"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-02.jpg"><div class="shade"></div></div>
+<div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ib010.jpg"><div class="shade"></div></div>
+<div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ib091.jpg"><div class="shade"></div></div>
+<div class="scene" id="s14"><img src="https://pypl4325.github.io/anon-media/bank/ph-grocery-05.jpg"><div class="shade"></div></div>
+<div class="top"><div class="badge">저당·제로 식품 상식 9</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov big" id="n1"><div class="n">2.3g</div><span class="l">김치 · 하루</span></div>
+<div class="wc" id="w1" style="left:90px"><div class="w">김치</div><div class="g">2.3g</div></div><div class="wc on" id="w2" style="left:570px"><div class="w">음료·차</div><div class="g">12.8g</div></div>
+<div class="ov big" id="n2"><div class="n d">10%</div><span class="l">하루 열량 중 더한 당</span></div>
+<div class="wc" id="k1" style="left:40px;width:320px"><div class="w">1,600kcal</div><div class="g">40g</div></div><div class="wc on" id="k2" style="left:380px;width:320px"><div class="w">2,000kcal</div><div class="g">50g</div></div><div class="wc" id="k3" style="left:720px;width:320px"><div class="w">2,400kcal</div><div class="g">60g</div></div>
+<div class="ov" id="label"><div class="t">원재료명 <span>예시</span></div><div class="r">배추, 무, 고춧가루, 마늘, 멸치액젓,<br><span class="mk">설탕</span>, <span class="mk">물엿</span>, 생강, 파</div></div>
+<div class="ov" id="share"><span>✈ 김치 사 먹는 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">지난 편도 있어요</div><div class="t"><span>'저당' 표시</span> 기준 편,<br>프로필에 있어요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap " id="c0">사 먹는 김치로</div>
+<div class="cap " id="c1">먹는 당,</div>
+<div class="cap " id="c2">하루 <span class='y'>2g</span> 남짓</div>
+<div class="cap sm" id="c3">김치가 아이스크림보다</div>
+<div class="cap sm" id="c4"><span class='y'>당이 많다</span>는 기사,</div>
+<div class="cap " id="c5">보셨죠?</div>
+<div class="cap sm" id="c6"><span class='y'>질병관리청</span> 분석</div>
+<div class="cap sm" id="c7">당을 적당히 먹는 남성은</div>
+<div class="cap " id="c8">김치에서 하루</div>
+<div class="cap sm" id="c9">당 급원 <span class='y'>5위</span></div>
+<div class="cap sm" id="c10">배추·무에 원래 든 당까지</div>
+<div class="cap " id="c11">합친 숫자예요</div>
+<div class="cap " id="c12">음료·차로는</div>
+<div class="cap " id="c13"><span class='y'>12.8g</span></div>
+<div class="cap sm" id="c14">김치의 <span class='y'>5배</span>가 넘어요</div>
+<div class="cap sm" id="c15">세계보건기구(WHO)는</div>
+<div class="cap sm" id="c16">더한 당을 하루 열량의</div>
+<div class="cap " id="c17"><span class='y'>10%</span> 아래로</div>
+<div class="cap sm" id="c18">하루 2,000kcal면</div>
+<div class="cap " id="c19"><span class='y'>50g</span></div>
+<div class="cap sm" id="c20">그래도 사 먹는 김치는</div>
+<div class="cap " id="c21"><span class='y'>뒷면</span>을 보세요</div>
+<div class="cap sm" id="c22">원재료명에 설탕·물엿?</div>
+<div class="cap sm" id="c23">단맛을 <span class='y'>더한</span> 김치예요</div>
+<div class="cap " id="c24">당을 줄이려면</div>
+<div class="cap sm" id="c25"><span class='y'>음료</span>부터 바꿔 보세요</div>
+<div class="cap sm endc" id="c26"><span class='y'>'저당'</span> 기준 편은 프로필에</div>
+<div class="cap sm endc" id="c27">지금 프로필 눌러서</div>
+<div class="cap sm endc" id="c28"><span class='y'>팔로우</span>해 두세요!</div>
+<audio id="voice" src="https://pypl4325.github.io/anon-media/out/v049/r1/voice.mp3" data-start="0" data-duration="49.8" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="49.8" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 2.48], [1, 2.48, 4.24], [2, 4.24, 8.24], [3, 8.24, 12.2], [4, 12.2, 15.52], [5, 15.52, 19.12], [6, 19.12, 21.92], [7, 21.92, 24.24], [8, 24.24, 26.48], [9, 26.48, 29.36], [10, 29.36, 32.32], [11, 32.32, 35.6], [12, 35.6, 40.64], [13, 40.64, 43.52], [14, 43.52, 49.8]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 1.28], [1, 1.28, 2.48], [2, 2.48, 4.24], [3, 4.24, 5.76], [4, 5.76, 7.12], [5, 7.12, 8.24], [6, 8.24, 10.24], [7, 10.24, 12.2], [8, 12.2, 13.36], [9, 13.36, 15.52], [10, 15.52, 17.24], [11, 17.24, 19.12], [12, 19.12, 20.24], [13, 20.24, 21.92], [14, 21.92, 24.24], [15, 24.24, 26.04], [16, 26.04, 27.28], [17, 27.28, 29.36], [18, 29.36, 30.8], [19, 30.8, 32.32], [20, 32.32, 33.44], [21, 33.44, 35.6], [22, 35.6, 37.72], [23, 37.72, 40.64], [24, 40.64, 41.8], [25, 41.8, 43.52], [26, 43.52, 46.48], [27, 46.48, 47.84], [28, 47.84, 49.8]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},13.36).set('#n1',{autoAlpha:0},15.52);
+tl.fromTo('#w1',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},19.12);
+tl.fromTo('#w2',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},20.24);
+tl.to('#w2',{scale:1.12,duration:0.2,yoyo:true,repeat:1},22.56);
+tl.set(['#w1','#w2'],{autoAlpha:0},24.24);
+tl.fromTo('#n2',{autoAlpha:0,y:120},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(2)'},27.28).set('#n2',{autoAlpha:0},29.36);
+[['#k1',29.7],['#k2',30.8],['#k3',31.3]].forEach(([w,t])=>tl.fromTo(w,{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},t));
+tl.set(['#k1','#k2','#k3'],{autoAlpha:0},32.32);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},35.6).set('#label',{autoAlpha:0},40.64);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},43.52).set('#share',{autoAlpha:0},46.48);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},43.52);
+const E=46.48;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.97);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.0).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.0);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.0);
+tl.to('#tap',{x:465,y:983,duration:0.5,ease:'power2.inOut'},E+1.5);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.05);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.1).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.1);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.15);
+[['#h1',E+2.2],['#h2',E+2.35],['#h3',E+2.5]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.9);
+tl.set({},{},49.8);
+window.__timelines=window.__timelines||{};
+window.__timelines.r049=tl;
+</script>
+</body></html>
