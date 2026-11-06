@@ -1,0 +1,163 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#A78BFA;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#A78BFA}
+.ov{position:absolute;opacity:0;z-index:7}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:40px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#A78BFA 55%)}
+.wc{position:absolute;top:500px;width:420px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:44px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#A78BFA}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#A78BFA;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#A78BFA,#7C5CF0,#A78BFA)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#A78BFA;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(167,139,250,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #A78BFA;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#A78BFA;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+*{word-break:keep-all}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#A78BFA;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.w{background:#fff}
+.big .n.d{background:#1A1A1A;color:#A78BFA;border:5px solid #A78BFA}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#half{left:0;right:0;top:560px;text-align:center}
+#half span{display:inline-block;background:#A78BFA;color:#111;font-weight:900;font-size:150px;padding:10px 50px;border-radius:30px;letter-spacing:-6px}
+
+.n.on2{background:#A78BFA}
+#grp{left:70px;right:70px;top:430px;display:flex;flex-direction:column;gap:22px}#grp .g{background:#FBF6EC;border-radius:30px;padding:28px 40px;font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;opacity:0;box-shadow:0 14px 40px rgba(0,0,0,.5)}#grp .g small{display:block;font-size:34px;color:#8A8274;font-weight:700}#grp .g.on{background:#1A1A1A;color:#A78BFA}#grp .g.on small{color:#CFC6B4}#bars{left:80px;right:80px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 48px;box-shadow:0 20px 60px rgba(0,0,0,.5)}#bars .h{font-weight:900;font-size:46px;color:#1A1A1A;margin-bottom:26px}#bars .lb{font-weight:800;font-size:38px;color:#4A4438;margin:18px 0 10px}#bars .tr{height:64px;background:#EDE4D3;border-radius:20px;overflow:hidden}#bars .f{height:100%;width:0;border-radius:20px;background:#1A1A1A}#bars .f.p{background:#A78BFA}#flash{position:absolute;inset:0;background:#A78BFA;opacity:0;z-index:6}#chk{left:120px;right:120px;top:520px;background:#FBF6EC;border-radius:36px;padding:40px 44px;text-align:center;font-weight:900;font-size:66px;color:#1A1A1A;letter-spacing:-2px;box-shadow:0 20px 60px rgba(0,0,0,.5)}#chk span{color:#A78BFA;background:#1A1A1A;border-radius:50%;display:inline-block;width:90px;height:90px;line-height:90px;margin-right:16px}</style></head><body>
+<main id="reel" data-composition-id="r046" data-width="1080" data-height="1920" data-duration="48.6">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-06.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib090.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib093.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib056.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib094.jpg"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib135.jpg"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-yogurt-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ib095.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-07.jpg"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib039.jpg"><div class="shade"></div></div>
+<div id="flash"></div>
+<div class="top"><div class="badge">영양제 상식 7</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov big" id="n1"><div class="n w">19명</div><span class="l">유산균 안 먹은 아이(100명 중)</span></div>
+<div class="ov big" id="n2"><div class="n">8명</div><span class="l">유산균 먹은 아이(100명 중)</span></div>
+<div class="ov" id="grp"><div class="g" id="g1"><small>①</small>그냥 기다림</div><div class="g on" id="g2"><small>②</small>유산균 먹음</div><div class="g" id="g3"><small>③</small>본인 장내 세균 이식</div></div>
+<div class="ov" id="bars"><div class="h">원래 장내 세균, 돌아오는 속도</div><div class="lb">그냥 기다린 그룹</div><div class="tr"><div class="f" id="b1"></div></div><div class="lb">유산균 그룹</div><div class="tr"><div class="f p" id="b2"></div></div></div>
+<div class="ov" id="label"><div class="t">연구의 한계 <span>Cell 2018</span></div><div class="r">항생제 실험 참가자 <span class="mk">21명</span><br>→ 단정할 순 없어요</div></div>
+<div class="ov" id="chk"><span>✓</span>약사에게 묻기</div>
+<div class="ov" id="next"><div class="k">댓글로 알려 주세요</div><div class="t">내가 먹는<br><span>유산균</span> 이름은?</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">영양제·식단, 근거로 알려 드려요</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">항생제엔 유산균,<br><span class='y'>늘 정답은 아니에요</span></div>
+<div class="cap " id="c1">어린이 연구 <span class='y'>23개</span></div>
+<div class="cap " id="c2">항생제 설사가</div>
+<div class="cap " id="c3">100명 중</div>
+<div class="cap " id="c4"><span class='y'>19명</span>에서</div>
+<div class="cap sm" id="c5"><span class='y'>8명</span>으로 줄었어요</div>
+<div class="cap " id="c6">그런데</div>
+<div class="cap sm" id="c7">이스라엘 <span class='y'>와이즈만연구소</span></div>
+<div class="cap sm" id="c8">실험은 달랐어요</div>
+<div class="cap sm" id="c9">항생제 먹은 <span class='y'>21명</span></div>
+<div class="cap sm" id="c10">세 그룹으로 나눴더니</div>
+<div class="cap sm" id="c11"><span class='y'>유산균</span> 그룹은</div>
+<div class="cap sm" id="c12">원래 장내 세균이</div>
+<div class="cap " id="c13"><span class='y'>몇 달</span> 동안</div>
+<div class="cap sm" id="c14">제자리로 못 돌아왔어요</div>
+<div class="cap sm" id="c15">그냥 기다린 그룹보다</div>
+<div class="cap " id="c16">오히려 <span class='y'>늦었죠</span></div>
+<div class="cap sm" id="c17">대변에 유산균이 나와도</div>
+<div class="cap sm" id="c18">장에 자리 잡는 건</div>
+<div class="cap sm" id="c19"><span class='y'>사람마다</span> 달랐어요</div>
+<div class="cap sm" id="c20">다만 사람 수가 적은 연구라</div>
+<div class="cap sm" id="c21"><span class='y'>단정</span>할 순 없어요</div>
+<div class="cap sm" id="c22">항생제 받을 때</div>
+<div class="cap sm" id="c23">유산균 같이 먹을지</div>
+<div class="cap " id="c24"><span class='y'>약사</span>에게 한 번</div>
+<div class="cap " id="c25">물어보세요</div>
+<div class="cap sm endc" id="c26">내가 먹는 유산균 이름,</div>
+<div class="cap sm endc" id="c27"><span class='y'>댓글</span>로 남겨 주세요</div>
+<div class="cap sm endc" id="c28">지금 <span class='y'>프로필</span> 눌러서 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://pypl4325.github.io/anon-media/out/v046/r2/voice.mp3" data-start="0" data-duration="48.6" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="48.6" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 4.8], [1, 4.8, 7.36], [2, 7.36, 12.32], [3, 12.32, 16.32], [4, 16.32, 20.08], [5, 20.08, 25.36], [6, 25.36, 28.4], [7, 28.4, 33.04], [8, 33.04, 37.04], [9, 37.04, 42.16], [10, 42.16, 48.6]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  if(i===5) { tl.fromTo(id+' img',{scale:1.0},{scale:1.3,duration:b-a,ease:'power1.inOut'},a); }
+  else if(i===8) { tl.fromTo(id+' img',{scale:1.3},{scale:1.02,duration:b-a,ease:'power1.out'},a); }
+  else { tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35); }
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 4.8], [1, 4.8, 7.36], [2, 7.36, 8.48], [3, 8.48, 9.28], [4, 9.28, 10.64], [5, 10.64, 12.32], [6, 12.32, 12.96], [7, 12.96, 14.56], [8, 14.56, 16.32], [9, 16.32, 18.4], [10, 18.4, 20.08], [11, 20.08, 21.24], [12, 21.24, 22.68], [13, 22.68, 23.52], [14, 23.52, 25.36], [15, 25.36, 26.88], [16, 26.88, 28.4], [17, 28.4, 30.16], [18, 30.16, 31.36], [19, 31.36, 33.04], [20, 33.04, 35.36], [21, 35.36, 37.04], [22, 37.04, 38.16], [23, 38.16, 40.08], [24, 40.08, 40.96], [25, 40.96, 42.16], [26, 42.16, 44.04], [27, 44.04, 45.68], [28, 45.68, 48.6]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},9.28).set('#n1',{autoAlpha:0},10.64);
+tl.fromTo('#n2',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(2)'},10.64).set('#n2',{autoAlpha:0},12.32);
+tl.set('#flash',{autoAlpha:0.55},12.32).to('#flash',{autoAlpha:0,duration:0.45},12.32);
+tl.set('#grp',{autoAlpha:1},18.4);
+[['#g1',18.4],['#g2',18.75],['#g3',19.1]].forEach(([g,t])=>tl.fromTo(g,{autoAlpha:0,x:-120,scale:0.8},{autoAlpha:1,x:0,scale:1,duration:0.3,ease:'back.out(2)'},t));
+tl.set('#grp',{autoAlpha:0},20.08);
+tl.fromTo('#bars',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},25.36);
+tl.fromTo('#b1',{width:'0%'},{width:'92%',duration:0.9,ease:'power2.out'},25.6);
+tl.fromTo('#b2',{width:'0%'},{width:'38%',duration:1.6,ease:'power1.out'},26.88);
+tl.set('#bars',{autoAlpha:0},28.4);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},33.3).set('#label',{autoAlpha:0},37.04);
+tl.fromTo('#chk',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(2.5)'},40.08).set('#chk',{autoAlpha:0},42.16);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},42.16);
+const E=45.68;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.35).to('#tap',{autoAlpha:1,duration:0.15},E+0.35);
+tl.to('#tap',{x:150,y:788,duration:0.4,ease:'power2.out'},E+0.4);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.82);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.85).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+0.85);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+0.85);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.35);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.35);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.85);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.9).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+1.9);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.95);
+[['#h1',E+2.0],['#h2',E+2.15],['#h3',E+2.3]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.6);
+tl.set({},{},48.6);
+window.__timelines=window.__timelines||{};
+window.__timelines.r046=tl;
+</script>
+</body></html>
