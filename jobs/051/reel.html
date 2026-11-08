@@ -1,0 +1,184 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif;word-break:keep-all}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FF6FA8;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FF6FA8}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:420px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:44px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#FF6FA8}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FF6FA8;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FF6FA8,#FF9CC6,#FF6FA8)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FF6FA8;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,111,168,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FF6FA8;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FF6FA8;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#FF6FA8;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.w{background:#fff}
+.big .n.d{background:#1A1A1A;color:#FF6FA8;border:5px solid #FF6FA8}
+.big .n.s{font-size:150px;letter-spacing:-6px}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#share{left:60px;right:60px;top:300px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#FF6FA8;font-weight:900;font-size:50px;padding:14px 34px;border-radius:999px;letter-spacing:-1.5px}
+#hook{left:60px;right:60px;top:300px;text-align:center;opacity:1;z-index:8}
+#hook .a{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:900;font-size:62px;line-height:1.25;padding:22px 40px;border-radius:30px;letter-spacing:-2px}
+#hook .a b{color:#FF6FA8}
+.tint{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+#hot{background:linear-gradient(180deg,rgba(255,80,40,.65),rgba(180,30,10,.55))}
+#cool{background:linear-gradient(180deg,rgba(80,170,255,.45),rgba(20,60,120,.35))}
+#combo{left:70px;right:70px;top:420px;background:#FBF6EC;border-radius:36px;padding:40px 46px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#combo .k{font-weight:800;font-size:36px;color:#8A8274;margin-bottom:18px}
+#combo .i{font-weight:900;font-size:62px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3;opacity:0}
+#combo .i b{color:#FF6FA8}
+#stamp{left:0;right:0;top:520px;text-align:center}
+#stamp span{display:inline-block;border:10px solid #FF5A4E;color:#FF5A4E;background:rgba(255,255,255,.9);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-8deg)}
+#obs{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#obs .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+</style></head><body>
+<main id="reel" data-composition-id="r051" data-width="1080" data-height="1920" data-duration="48.4">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ib125.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-05.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib125.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib034.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib029.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib009.jpg"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib117.jpg"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-06.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ib032.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-03.jpg"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-05.jpg"><div class="shade"></div></div>
+<div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ib067.jpg"><div class="shade"></div></div>
+<div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ib119.jpg"><div class="shade"></div></div>
+<div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ib125.jpg"><div class="shade"></div></div>
+<div class="scene" id="s14"><img src="https://pypl4325.github.io/anon-media/bank/ib030.jpg"><div class="shade"></div></div>
+<div class="scene" id="s15"><img src="https://pypl4325.github.io/anon-media/bank/ib032.jpg"><div class="shade"></div></div>
+<div class="tint" id="hot"></div><div class="tint" id="cool"></div>
+<div class="top"><div class="badge">이번 주 건강 이슈 10</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="hook"><div class="a">차 습관처럼 마신 사람<br>혈관 질환 <b>11% 적었다</b></div></div>
+<div class="ov big" id="n1"><div class="n">11%↓</div><span class="l">혈관 질환 위험</span></div>
+<div class="ov big" id="n2"><div class="n d">16%↑</div><span class="l">아주 뜨겁게 마신 사람</span></div>
+<div class="wc" id="w1" style="left:90px"><div class="w">중국 성인</div><div class="g">48만여</div></div><div class="wc on" id="w2" style="left:570px"><div class="w">지켜본 기간</div><div class="g">약 9년</div></div>
+<div class="ov big" id="n3"><div class="n w s">14,863명</div><span class="l">혈관 질환이 생긴 사람</span></div>
+<div class="ov" id="combo"><div class="k">세 습관을 다 가진 사람</div><div class="i" id="i1">① 차를 습관처럼</div><div class="i" id="i2">② 담배 <b>안 피움</b></div><div class="i" id="i3">③ 몸을 <b>많이</b> 움직임</div></div>
+<div class="ov big" id="n4"><div class="n">45%↓</div><span class="l">세 습관을 다 가진 사람</span></div>
+<div class="ov big" id="n5"><div class="n w">6~8잔</div><span class="l">하루, 위험이 가장 낮게 나온 양</span></div>
+<div class="ov" id="stamp"><span>권장량 ✕</span></div>
+<div class="ov" id="obs"><div class="t">같이 나타났다 <span>≠ 원인</span></div><div class="s">관찰 연구 · 차가 지켜 줬다는 증명은 아직 없어요</div></div>
+<div class="wc" id="t1" style="left:90px"><div class="w">아주 뜨겁게</div><div class="g">✕</div></div><div class="wc on" id="t2" style="left:570px"><div class="w">한 김 식혀서</div><div class="g">○</div></div>
+<div class="ov" id="share"><span>✈ 매일 차 마시는 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">안온 단백질 연구소</div><div class="t">건강 뉴스,<br>매주 <span>원문으로</span> 따져요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">차를 습관처럼 마신 사람</div>
+<div class="cap" id="c1">혈관 질환 <span class='y'>11%</span> 적었어요</div>
+<div class="cap sm" id="c2">그런데 <span class='y'>아주 뜨겁게</span> 마시면</div>
+<div class="cap" id="c3">오히려 <span class='y'>16%</span> 많았어요</div>
+<div class="cap sm" id="c4">중국 성인 <span class='y'>48만여 명</span></div>
+<div class="cap sm" id="c5">약 <span class='y'>9년</span> 지켜본 연구</div>
+<div class="cap sm" id="c6">그사이 <span class='y'>1만 5천 명</span> 가까이</div>
+<div class="cap sm" id="c7">혈관 질환이 생겼어요</div>
+<div class="cap sm" id="c8">차에 <span class='y'>담배 안 피우고</span></div>
+<div class="cap sm" id="c9"><span class='y'>몸 많이</span> 움직이면</div>
+<div class="cap" id="c10">위험 <span class='y'>45%</span> 낮았어요</div>
+<div class="cap" id="c11">하루 <span class='y'>6~8잔</span>에서</div>
+<div class="cap sm" id="c12">위험이 가장 낮았지만</div>
+<div class="cap" id="c13"><span class='y'>권장량</span>은 아니에요</div>
+<div class="cap sm" id="c14">같이 나타난 <span class='y'>관찰 연구</span></div>
+<div class="cap sm" id="c15">차 덕분이라고 <span class='y'>단정 못 해요</span></div>
+<div class="cap sm" id="c16">오늘부터 찻잔은</div>
+<div class="cap sm" id="c17"><span class='y'>한 김 식혀서</span> 드세요</div>
+<div class="cap sm" id="c18">건강 뉴스, 매주 <span class='y'>원문</span>으로</div>
+<div class="cap sm endc" id="c19">놓치기 싫으면</div>
+<div class="cap sm endc" id="c20">지금 프로필 눌러서</div>
+<div class="cap sm endc" id="c21"><span class='y'>팔로우</span>해 두세요!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v051/r1/voice.mp3" data-start="0" data-duration="48.4" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="48.4" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0,0,2.6],[1,2.6,5.2],[2,5.2,7.76],[3,7.76,10.48],[4,10.48,12.72],[5,12.72,15.04],[6,15.04,18.88],[7,18.88,22.72],[8,22.72,26.4],[9,26.4,30.32],[10,30.32,32.48],[11,32.48,34.8],[12,34.8,37.68],[13,37.68,40.88],[14,40.88,43.92],[15,43.92,48.4]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0,0,2.16],[1,2.16,5.2],[2,5.2,7.76],[3,7.76,10.48],[4,10.48,12.72],[5,12.72,15.04],[6,15.04,17.04],[7,17.04,18.88],[8,18.88,20.64],[9,20.64,22.72],[10,22.72,26.4],[11,26.4,28.48],[12,28.48,30.32],[13,30.32,32.48],[14,32.48,34.8],[15,34.8,37.68],[16,37.68,39.12],[17,39.12,40.88],[18,40.88,43.92],[19,43.92,45.2],[20,45.2,46.6],[21,46.6,48.4]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.set('#hook',{autoAlpha:1},0).to('#hook',{autoAlpha:0,duration:0.2},2.9);
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},3.1).set('#n1',{autoAlpha:0},5.2);
+tl.to('#hot',{opacity:1,duration:0.5},5.2).set('#hot',{opacity:0},7.76);
+tl.fromTo('#n2',{autoAlpha:0,y:120},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(2)'},8.4).set('#n2',{autoAlpha:0},10.48);
+tl.fromTo('#w1',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},11.4);
+tl.fromTo('#w2',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},12.84);
+tl.set(['#w1','#w2'],{autoAlpha:0},15.04);
+tl.fromTo('#n3',{autoAlpha:0,scale:1.8},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},15.8).set('#n3',{autoAlpha:0},18.88);
+tl.fromTo('#combo',{autoAlpha:0,scale:1.3},{autoAlpha:1,scale:1,duration:0.3,ease:'power3.out'},18.95);
+tl.fromTo('#i1',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25},19.0);
+tl.fromTo('#i2',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25},19.36);
+tl.fromTo('#i3',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25},20.72);
+tl.set('#combo',{autoAlpha:0},23.5);
+tl.fromTo('#n4',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},23.6).set('#n4',{autoAlpha:0},26.4);
+tl.fromTo('#n5',{autoAlpha:0,y:120},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(2)'},26.8).set('#n5',{autoAlpha:0},30.32);
+tl.fromTo('#stamp',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},30.84).set('#stamp',{autoAlpha:0},32.48);
+tl.fromTo('#obs',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},32.56).set('#obs',{autoAlpha:0},37.68);
+tl.to('#cool',{opacity:1,duration:0.6},37.7).set('#cool',{opacity:0},40.88);
+tl.fromTo('#t1',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},37.76);
+tl.fromTo('#t2',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},39.2);
+tl.to('#t2',{scale:1.12,duration:0.2,yoyo:true,repeat:1},39.6);
+tl.set(['#t1','#t2'],{autoAlpha:0},40.88);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},40.96);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},43.92).set('#share',{autoAlpha:0},45.2);
+const E=45.2;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.97);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.0).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.0);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.0);
+tl.to('#tap',{x:465,y:983,duration:0.5,ease:'power2.inOut'},E+1.5);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.05);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.1).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.1);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.15);
+[['#h1',E+2.2],['#h2',E+2.35],['#h3',E+2.5]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.9);
+tl.set({},{},48.4);
+window.__timelines=window.__timelines||{};
+window.__timelines.r051=tl;
+</script>
+</body></html>
