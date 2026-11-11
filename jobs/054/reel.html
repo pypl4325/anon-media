@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0,#hook{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#4DA3FF;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#4DA3FF}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:290px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:48px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#4DA3FF}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#4DA3FF;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#4DA3FF 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#4DA3FF,#2F7FE0,#4DA3FF)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#4DA3FF;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,200,61,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #4DA3FF;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#4DA3FF;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1290px}
+.chips{left:50px;right:50px;top:470px;display:flex;gap:14px}
+.chip{flex:1;background:#FBF6EC;border-radius:28px;padding:26px 0;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);opacity:0}
+.chip .w{font-size:30px;font-weight:800;color:#8A8274}.chip .g{font-size:64px;font-weight:900;color:#1A1A1A;letter-spacing:-3px}
+.chip.on{background:#1A1A1A}.chip.on .w{color:#CFC6B4}.chip.on .g{color:#4DA3FF}
+.bign{left:0;right:0;top:430px;text-align:center}
+.bign .n{display:inline-block;background:#4DA3FF;color:#111;font-weight:900;font-size:200px;padding:0 50px;border-radius:40px;letter-spacing:-8px;line-height:1.15;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bign .l{display:block;color:#fff;font-weight:900;font-size:64px;margin-top:20px;text-shadow:0 4px 20px rgba(0,0,0,.9)}
+.bign .n.w{background:#FBF6EC;color:#1A1A1A}
+#cal{left:70px;right:70px;top:450px;background:#FBF6EC;border-radius:40px;padding:40px 36px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#cal .k{font-weight:900;font-size:50px;color:#1A1A1A;margin-bottom:26px;letter-spacing:-2px}
+#cal .d{display:flex;gap:12px}
+#cal .d div{flex:1;height:150px;border-radius:22px;background:#fff;box-shadow:0 2px 0 #EDE4D3;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:36px;color:#8A8274}
+#cal .d div b{display:block;font-size:56px;color:#4DA3FF;opacity:0;line-height:1}
+#share{left:60px;right:60px;top:250px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#fff;font-weight:900;font-size:50px;padding:16px 34px;border-radius:999px;border:3px solid #4DA3FF;letter-spacing:-1.5px}
+.tint{position:absolute;inset:0;background:#4DA3FF;mix-blend-mode:multiply;opacity:0;z-index:2}
+</style></head><body>
+<main id="reel" data-composition-id="r054" data-width="1080" data-height="1920" data-duration="50.3">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-04.jpg"><div class="shade"></div></div><div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib025.jpg"><div class="shade"></div></div><div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-05.jpg"><div class="shade"></div></div><div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib137.jpg"><div class="shade"></div></div><div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib053.jpg"><div class="shade"></div></div><div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib133.jpg"><div class="shade"></div></div><div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-01.jpg"><div class="shade"></div></div><div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ib137.jpg"><div class="shade"></div></div><div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-05.jpg"><div class="shade"></div></div><div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ib053.jpg"><div class="shade"></div></div><div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib121.jpg"><div class="shade"></div></div><div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-04.jpg"><div class="shade"></div></div><div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-01.jpg"><div class="shade"></div></div><div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ib052.jpg"><div class="shade"></div></div><div class="scene" id="s14"><img src="https://pypl4325.github.io/anon-media/bank/ph-gym-04.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">근육 상식 8</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov bign" id="hook"><span class="n">35살</span><span class="l">체력이 줄기 시작해요</span></div>
+<div class="ov bign" id="n427"><span class="n w">427명</span><span class="l">같은 사람을 다시 쟀어요</span></div>
+<div class="ov chips" id="chips"><div class="chip" id="a1"><div class="w">1974</div><div class="g">16</div></div><div class="chip" id="a2"><div class="w">다시</div><div class="g">27</div></div><div class="chip" id="a3"><div class="w">다시</div><div class="g">34</div></div><div class="chip" id="a4"><div class="w">다시</div><div class="g">52</div></div><div class="chip on" id="a5"><div class="w">2021</div><div class="g">63</div></div></div>
+<div class="ov bign" id="n47"><span class="n">47년</span></div>
+<div class="ov bign" id="npeak"><span class="n w">36살 전</span><span class="l">정점</span></div>
+<div class="ov bign" id="nslow"><span class="n w">0.3~0.6%</span><span class="l">처음엔 해마다 조금</span></div>
+<div class="ov bign" id="nfast"><span class="n">2%+</span><span class="l">나중엔 해마다</span></div>
+<div class="wc" id="w1" style="left:150px"><div class="w">정점</div><div class="g">100</div></div>
+<div class="wc on" id="w2" style="left:640px"><div class="w">63살</div><div class="g">65</div></div>
+<div class="ov bign" id="n11"><span class="n">+11%</span><span class="l">벤치프레스 반복 횟수</span></div>
+<div class="ov" id="cal"><div class="k">이번 주 근력 운동 날</div><div class="d"><div>월<b id="k1">✔</b></div><div>화</div><div>수</div><div>목<b id="k2">✔</b></div><div>금</div><div>토</div><div>일</div></div></div>
+<div class="ov" id="share"><span>✈ 운동 미루는 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">이어서 보기</div><div class="t">운동 쉬면 근육,<br><span>며칠 만에</span> 빠질까?</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap " id="c0"><span class="y">체력</span>은</div><div class="cap sm" id="c1"><span class="y">35살</span> 무렵부터 줄어요</div><div class="cap " id="c2">스웨덴, <span class="y">같은 사람</span></div><div class="cap " id="c3"><span class="y">427명</span>을</div><div class="cap sm" id="c4"><span class="y">16살</span>부터 <span class="y">63살</span>까지</div><div class="cap sm" id="c5"><span class="y">47년</span> 동안 다섯 번</div><div class="cap sm" id="c6">심폐 체력·<span class="y">근지구력</span></div><div class="cap sm" id="c7"><span class="y">36살 전</span>에 정점</div><div class="cap sm" id="c8">해마다 <span class="y">조금씩</span> 줄다가</div><div class="cap sm" id="c9">나중엔 <span class="y">해마다 2%</span> 넘게</div><div class="cap " id="c10"><span class="y">63살</span>엔</div><div class="cap sm" id="c11">정점의 <span class="y">65%</span>만</div><div class="cap sm" id="c12">그런데 <span class="y">반가운</span> 결과</div><div class="cap sm" id="c13">어른이 돼서 <span class="y">시작해도</span></div><div class="cap sm" id="c14">체력이 <span class="y">올라갔어요</span></div><div class="cap sm" id="c15">벤치프레스 반복 <span class="y">+11%</span></div><div class="cap sm" id="c16">달력에 <span class="y">일주일 두 번</span></div><div class="cap sm" id="c17"><span class="y">근력 운동</span> 날부터</div><div class="cap sm endc" id="c18">운동 쉬면 <span class="y">근육</span>은?</div><div class="cap sm endc" id="c19"><span class="y">프로필</span>에 있어요</div><div class="cap sm endc" id="c20">지금 <span class="y">팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v054/r1/voice.mp3" data-start="0" data-duration="50.3" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="50.3" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 3.12], [1, 3.12, 6.5], [2, 6.5, 9.3], [3, 9.3, 12.28], [4, 12.28, 14.3], [5, 14.3, 17.15], [6, 17.15, 19.56], [7, 19.56, 22.92], [8, 22.92, 27.15], [9, 27.15, 29.8], [10, 29.8, 34.44], [11, 34.44, 38.12], [12, 38.12, 42.96], [13, 42.96, 47.24], [14, 47.24, 50.3]];
+S.forEach(([i,a,b])=>{const id='#s'+i,dir=i%2?1:-1;
+ tl.set(id,{opacity:1},a);
+ tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+ tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+ if(i<S.length-1) tl.set(id,{opacity:0},b);});
+const C=[[0, 0, 1.6], [1, 1.6, 3.12], [2, 3.12, 4.88], [3, 4.88, 6.5], [4, 6.5, 9.3], [5, 9.3, 12.28], [6, 12.28, 14.3], [7, 14.3, 17.15], [8, 17.15, 19.56], [9, 19.56, 22.92], [10, 22.92, 24.6], [11, 24.6, 27.15], [12, 27.15, 29.8], [13, 29.8, 32.08], [14, 32.08, 34.44], [15, 34.44, 38.12], [16, 38.12, 40.6], [17, 40.6, 42.96], [18, 42.96, 45.12], [19, 45.12, 47.24], [20, 47.24, 50.3]];
+C.forEach(([i,a,b])=>{const el='#c'+i;
+ if(i===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+ if(i<C.length-1) tl.set(el,{autoAlpha:0},b);});
+tl.set('#hook',{autoAlpha:1},0).set('#hook',{autoAlpha:0},3.12);
+tl.fromTo('#n427',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(2)'},4.88).set('#n427',{autoAlpha:0},6.5);
+tl.set('#chips',{autoAlpha:1},6.5);
+[['#a1',6.56],['#a2',6.95],['#a3',7.35],['#a4',7.7],['#a5',7.92]].forEach(([e,t])=>tl.fromTo(e,{autoAlpha:0,y:60,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.25,ease:'back.out(2.2)'},t));
+tl.set('#chips',{autoAlpha:0},9.3);
+tl.fromTo('#n47',{autoAlpha:0,scale:2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},9.36).set('#n47',{autoAlpha:0},12.28);
+tl.fromTo('#npeak',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},14.32).set('#npeak',{autoAlpha:0},17.15);
+tl.fromTo('#nslow',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(2)'},17.76).set('#nslow',{autoAlpha:0},19.56);
+tl.fromTo('#nfast',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},20.72).set('#nfast',{autoAlpha:0},22.92);
+tl.fromTo('#w1',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},22.96);
+tl.fromTo('#w2',{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},24.64);
+tl.set(['#w1','#w2'],{autoAlpha:0},27.15);
+tl.set('#cool',{opacity:0.35},27.15).to('#cool',{opacity:0,duration:0.8},27.2);
+tl.fromTo('#n11',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},36.24).set('#n11',{autoAlpha:0},38.12);
+tl.fromTo('#cal',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},38.16);
+tl.fromTo('#k1',{autoAlpha:0,scale:2},{autoAlpha:1,scale:1,duration:0.2},39.84).fromTo('#k2',{autoAlpha:0,scale:2},{autoAlpha:1,scale:1,duration:0.2},40.0);
+tl.set('#cal',{autoAlpha:0},42.96);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3},43.04);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},43.04);
+const E=47.28;
+tl.to('#share',{autoAlpha:0,duration:0.2},E);
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.3).to('#tap',{autoAlpha:1,duration:0.12},E+0.3);
+tl.to('#tap',{x:150,y:788,duration:0.35,ease:'power2.out'},E+0.35);
+tl.to('#tap',{scale:0.75,duration:0.1,yoyo:true,repeat:1},E+0.72);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.75).to('#r1',{scale:2.2,autoAlpha:0,duration:0.45,ease:'power2.out'},E+0.75);
+tl.to('#prof .av',{scale:1.08,duration:0.1,yoyo:true,repeat:1},E+0.75);
+tl.to('#tap',{x:465,y:983,duration:0.4,ease:'power2.inOut'},E+1.2);
+tl.to('#tap',{scale:0.75,duration:0.1,yoyo:true,repeat:1},E+1.65);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.7).to('#r2',{scale:2.6,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.7);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.75);
+[['#h1',E+1.8],['#h2',E+1.95],['#h3',E+2.1]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.5,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.25},t+0.5));
+tl.to('#tap',{autoAlpha:0,duration:0.2},E+2.6);
+tl.set({},{},50.3);
+window.__timelines=window.__timelines||{};
+window.__timelines.r054=tl;
+</script>
+</body></html>
