@@ -1,0 +1,125 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0,#hook{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#3DDC97;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#3DDC97}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:290px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:48px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#3DDC97}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#3DDC97;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#3DDC97 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#3DDC97,#1FB57A,#3DDC97)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#3DDC97;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,200,61,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #3DDC97;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#3DDC97;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1290px}
+.chips{left:50px;right:50px;top:470px;display:flex;gap:14px}
+.chip{flex:1;background:#FBF6EC;border-radius:28px;padding:26px 0;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);opacity:0}
+.chip .w{font-size:30px;font-weight:800;color:#8A8274}.chip .g{font-size:64px;font-weight:900;color:#1A1A1A;letter-spacing:-3px}
+.bign{left:0;right:0;top:430px;text-align:center}
+.bign .n{display:inline-block;background:#3DDC97;color:#111;font-weight:900;font-size:200px;padding:0 50px;border-radius:40px;letter-spacing:-8px;line-height:1.15;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bign .l{display:block;color:#fff;font-weight:900;font-size:64px;margin-top:20px;text-shadow:0 4px 20px rgba(0,0,0,.9)}
+.bign .n.w{background:#FBF6EC;color:#1A1A1A}
+#share{left:60px;right:60px;top:250px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#fff;font-weight:900;font-size:50px;padding:16px 34px;border-radius:999px;border:3px solid #3DDC97;letter-spacing:-1.5px}
+.tint{position:absolute;inset:0;background:#3DDC97;mix-blend-mode:multiply;opacity:0;z-index:2}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:44px;color:#4A4438;line-height:1.6}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#3DDC97 55%)}
+</style></head><body>
+<main id="reel" data-composition-id="r055" data-width="1080" data-height="1920" data-duration="48.2">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-chicken-02.jpg"><div class="shade"></div></div><div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ph-egg-01.jpg"><div class="shade"></div></div><div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-tofu-03.jpg"><div class="shade"></div></div><div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ph-chicken-05.jpg"><div class="shade"></div></div><div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-chicken-03.jpg"><div class="shade"></div></div><div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib043.jpg"><div class="shade"></div></div><div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib116.jpg"><div class="shade"></div></div><div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-tofu-01.jpg"><div class="shade"></div></div><div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-egg-04.jpg"><div class="shade"></div></div><div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ib083.jpg"><div class="shade"></div></div><div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib118.jpg"><div class="shade"></div></div><div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ib064.jpg"><div class="shade"></div></div><div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ib007.jpg"><div class="shade"></div></div><div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ph-egg-05.jpg"><div class="shade"></div></div><div class="scene" id="s14"><img src="https://pypl4325.github.io/anon-media/bank/ph-tofu-03.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">단백질 상식 8</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov bign" id="hook"><span class="n">20g</span><span class="l">고기 없이도 채워요</span></div>
+<div class="ov chips" id="chips"><div class="chip" id="a1"><div class="w">렌틸콩 100g</div><div class="g">9g</div></div><div class="chip" id="a2"><div class="w">달걀 1개</div><div class="g">8g</div></div><div class="chip" id="a3"><div class="w">우유 1컵</div><div class="g">6g</div></div></div>
+<div class="ov bign" id="n23"><span class="n">23g</span><span class="l">셋을 합치면</span></div>
+<div class="ov bign" id="n31"><span class="n w">31g</span><span class="l">구운 닭가슴살 100g</span></div>
+<div class="ov bign" id="n9"><span class="n">9g</span><span class="l">삶은 콩 100g</span></div>
+<div class="wc" id="w1" style="left:60px"><div class="w">두부 100g</div><div class="g">10g</div></div>
+<div class="wc" id="w2" style="left:395px"><div class="w">달걀 1개</div><div class="g">8g</div></div>
+<div class="wc on" id="w3" style="left:730px"><div class="w">우유 1컵</div><div class="g">6g</div></div>
+<div class="ov bign" id="n200"><span class="n w">200g+</span><span class="l">삶은 콩으로만 20g이면</span></div>
+<div class="ov" id="label"><div class="t">영양정보 <span>뒷면</span></div><div class="r">열량 ○○ kcal<br>탄수화물 ○○ g<br><span class="mk">단백질 ○○ g</span> ← 여기부터</div></div>
+<div class="ov" id="share"><span>✈ 닭가슴살 질린 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">이어서 보기</div><div class="t">단백질 20g,<br><span>편의점에서</span> 채우기</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap " id="c0">고기 <span class="y">없이도</span></div><div class="cap " id="c1">단백질 <span class="y">20g</span></div><div class="cap " id="c2">채울 수 있어요</div><div class="cap sm" id="c3"><span class="y">렌틸콩</span> 100g에</div><div class="cap " id="c4"><span class="y">달걀</span> 하나,</div><div class="cap sm" id="c5"><span class="y">우유</span> 한 컵이면</div><div class="cap " id="c6"><span class="y">23g</span>이에요</div><div class="cap sm" id="c7">구운 <span class="y">닭가슴살</span>은</div><div class="cap " id="c8">100g에 <span class="y">31g</span></div><div class="cap " id="c9">그런데</div><div class="cap sm" id="c10"><span class="y">렌틸콩·병아리콩</span>도</div><div class="cap " id="c11">100g에 <span class="y">9g</span>쯤</div><div class="cap sm" id="c12"><span class="y">두부</span> 100g은 약 10g</div><div class="cap sm" id="c13"><span class="y">달걀</span> 1개는 8g</div><div class="cap sm" id="c14"><span class="y">우유</span> 1컵은 6g</div><div class="cap sm" id="c15"><span class="y">콩만으로</span> 20g은</div><div class="cap sm" id="c16"><span class="y">200g</span> 넘게 먹어야</div><div class="cap sm" id="c17">한 가지보다 <span class="y">섞기</span></div><div class="cap " id="c18">장 볼 때는</div><div class="cap sm" id="c19"><span class="y">뒷면</span> 영양정보</div><div class="cap sm" id="c20"><span class="y">단백질 g</span>부터</div><div class="cap sm endc" id="c21">편의점 20g은 <span class="y">프로필</span>에</div><div class="cap sm endc" id="c22">지금 <span class="y">팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v055/r1/voice.mp3" data-start="0" data-duration="48.2" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="48.2" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 3.92], [1, 3.92, 6.64], [2, 6.64, 9.44], [3, 9.44, 11.44], [4, 11.44, 13.6], [5, 13.6, 16.56], [6, 16.56, 19.12], [7, 19.12, 21.6], [8, 21.6, 24.16], [9, 24.16, 27.6], [10, 27.6, 32.0], [11, 32.0, 35.04], [12, 35.04, 37.44], [13, 37.44, 40.64], [14, 40.64, 48.2]];
+S.forEach(([i,a,b])=>{const id='#s'+i,dir=i%2?1:-1;
+ tl.set(id,{opacity:1},a);
+ tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+ tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+ if(i<S.length-1) tl.set(id,{opacity:0},b);});
+const C=[[0, 0, 1.04], [1, 1.04, 2.48], [2, 2.48, 3.92], [3, 3.92, 5.68], [4, 5.68, 6.64], [5, 6.64, 7.68], [6, 7.68, 9.44], [7, 9.44, 11.44], [8, 11.44, 13.6], [9, 13.6, 14.4], [10, 14.4, 16.56], [11, 16.56, 19.12], [12, 19.12, 21.6], [13, 21.6, 24.16], [14, 24.16, 27.6], [15, 27.6, 29.76], [16, 29.76, 32.0], [17, 32.0, 35.04], [18, 35.04, 36.96], [19, 36.96, 38.72], [20, 38.72, 40.64], [21, 40.64, 44.24], [22, 44.24, 48.2]];
+C.forEach(([i,a,b])=>{const el='#c'+i;
+ if(i===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+ if(i<C.length-1) tl.set(el,{autoAlpha:0},b);});
+tl.set('#hook',{autoAlpha:1},0).set('#hook',{autoAlpha:0},3.92);
+tl.set('#chips',{autoAlpha:1},3.92);
+[['#a1',4.24],['#a2',5.68],['#a3',6.64]].forEach(([e,t])=>tl.fromTo(e,{autoAlpha:0,y:60,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.25,ease:'back.out(2.2)'},t));
+tl.set('#chips',{autoAlpha:0},7.68);
+tl.fromTo('#n23',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},7.68).set('#n23',{autoAlpha:0},9.44);
+tl.fromTo('#n31',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},11.44).set('#n31',{autoAlpha:0},13.6);
+tl.fromTo('#n9',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(2)'},17.36).set('#n9',{autoAlpha:0},19.12);
+[['#w1',20.32],['#w2',22.84],['#w3',26.32]].forEach(([w,t])=>tl.fromTo(w,{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},t));
+tl.set(['#w1','#w2','#w3'],{autoAlpha:0},27.6);
+tl.fromTo('#n200',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},29.76).set('#n200',{autoAlpha:0},32.0);
+tl.set('#cool',{opacity:0.35},32.0).to('#cool',{opacity:0,duration:0.8},32.05);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},36.96).set('#label',{autoAlpha:0},40.64);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3},40.7);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},40.7);
+const E=44.28;
+tl.to('#share',{autoAlpha:0,duration:0.2},E);
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.25);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.3).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.3);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.3);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.8);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.4);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.45).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.45);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.5);
+[['#h1',E+2.55],['#h2',E+2.7],['#h3',E+2.85]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.5,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.25},t+0.5));
+tl.to('#tap',{autoAlpha:0,duration:0.2},E+3.5);
+tl.set({},{},48.2);
+window.__timelines=window.__timelines||{};
+window.__timelines.r055=tl;
+</script>
+</body></html>
