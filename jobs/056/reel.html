@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0,#hook{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FF6FA8;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FF6FA8}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:290px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:48px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#FF6FA8}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FF6FA8;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FF6FA8,#E04C8C,#FF6FA8)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FF6FA8;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,111,168,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FF6FA8;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FF6FA8;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1290px}
+.chips{left:50px;right:50px;top:470px;display:flex;gap:14px}
+.chip{flex:1;background:#FBF6EC;border-radius:28px;padding:26px 0;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);opacity:0}
+.chip .w{font-size:30px;font-weight:800;color:#8A8274}.chip .g{font-size:64px;font-weight:900;color:#1A1A1A;letter-spacing:-3px}
+.bign{left:0;right:0;top:430px;text-align:center}
+.bign .n{display:inline-block;background:#FF6FA8;color:#111;font-weight:900;font-size:200px;padding:0 50px;border-radius:40px;letter-spacing:-8px;line-height:1.15;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bign .l{display:block;color:#fff;font-weight:900;font-size:64px;margin-top:20px;text-shadow:0 4px 20px rgba(0,0,0,.9)}
+.bign .n.w{background:#FBF6EC;color:#1A1A1A}
+#share{left:60px;right:60px;top:250px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#fff;font-weight:900;font-size:50px;padding:16px 34px;border-radius:999px;border:3px solid #FF6FA8;letter-spacing:-1.5px}
+.tint{position:absolute;inset:0;background:#FF6FA8;mix-blend-mode:multiply;opacity:0;z-index:2}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:44px;color:#4A4438;line-height:1.6}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FF6FA8 55%)}
+#sym{left:90px;right:90px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#sym .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px;word-break:keep-all}
+#sym .r{font-weight:700;font-size:48px;color:#4A4438;line-height:1.65;word-break:keep-all}
+#sym .r b{color:#E8664D;font-weight:900}
+</style></head>
+<body>
+<main id="reel" data-composition-id="r056" data-width="1080" data-height="1920" data-duration="47.2">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-05.jpg"><div class="shade"></div></div><div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib085.jpg"><div class="shade"></div></div><div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib065.jpg"><div class="shade"></div></div><div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib066.jpg"><div class="shade"></div></div><div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-02.jpg"><div class="shade"></div></div><div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib085.jpg"><div class="shade"></div></div><div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-04.jpg"><div class="shade"></div></div><div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ib040.jpg"><div class="shade"></div></div><div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-02.jpg"><div class="shade"></div></div><div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-05.jpg"><div class="shade"></div></div><div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib087.jpg"><div class="shade"></div></div><div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ib065.jpg"><div class="shade"></div></div><div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ib066.jpg"><div class="shade"></div></div><div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ib087.jpg"><div class="shade"></div></div><div class="scene" id="s14"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-02.jpg"><div class="shade"></div></div><div class="scene" id="s15"><img src="https://pypl4325.github.io/anon-media/bank/ib040.jpg"><div class="shade"></div></div><div class="scene" id="s16"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-04.jpg"><div class="shade"></div></div><div class="scene" id="s17"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-05.jpg"><div class="shade"></div></div><div class="scene" id="s18"><img src="https://pypl4325.github.io/anon-media/bank/ib065.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">이번 주 건강 이슈 11</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov bign" id="hook"><span class="n">6병</span><span class="l">해외 처방 약, 들고 와요</span></div>
+<div class="ov bign" id="n12"><span class="n w">12개</span><span class="l">주 1회 주사, 석 달 치</span></div>
+<div class="ov bign" id="nstop"><span class="n w" style="font-size:150px">통관 보류</span><span class="l">11월 11일까지</span></div>
+<div class="ov chips" id="chips"><div class="chip" id="a1"><div class="w">그 나라</div><div class="g" style="font-size:52px">정식 허가</div></div><div class="chip" id="a2"><div class="w">정상</div><div class="g" style="font-size:52px">처방·구매</div></div></div>
+<div class="wc" id="w1" style="left:120px;width:400px"><div class="w">6병까지</div><div class="g">OK</div></div>
+<div class="wc on" id="w2" style="left:560px;width:400px"><div class="w">넘으면</div><div class="g" style="font-size:76px">3개월 치</div></div>
+<div class="ov bign" id="nfda"><span class="n">눈 경고</span><span class="l">미국 FDA · 11월 9일</span></div>
+<div class="ov" id="sym"><div class="t">이럴 땐 바로 진료</div><div class="r">· <b>한쪽</b> 눈 시력이<br>· <b>갑자기</b>, 통증 없이<br>· 흐리거나 일부가 안 보임</div></div>
+<div class="ov" id="label"><div class="t">들고 오기 전 <span>확인</span></div><div class="r">그 나라 <span class="mk">정식 허가</span> 약?<br>정상 처방·구매?<br>6병(넘으면 3개월 치) 안?</div></div>
+<div class="ov" id="share"><span>✈ 해외 출장·여행 잦은 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">팔로우할 이유</div><div class="t">약·식품 소식,<br><span>근거</span>로만 정리해요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap " id="c0">해외 처방 <span class="y">약</span></div><div class="cap " id="c1"><span class="y">6병</span>까지</div><div class="cap sm" id="c2">들고 와도 돼요</div><div class="cap sm" id="c3">주 1회 <span class="y">비만 주사</span></div><div class="cap " id="c4">석 달 치 <span class="y">12개</span></div><div class="cap " id="c5">지금까진</div><div class="cap sm" id="c6"><span class="y">세관</span>에서 막혔어요</div><div class="cap " id="c7">조건은 <span class="y">하나</span></div><div class="cap sm" id="c8">그 나라 <span class="y">정식 허가</span> 약</div><div class="cap sm" id="c9"><span class="y">정상 처방</span>·구매</div><div class="cap " id="c10"><span class="y">6병</span> 넘으면</div><div class="cap sm" id="c11">용법대로 <span class="y">3개월</span> 치</div><div class="cap sm" id="c12">같은 주, 미국 <span class="y">FDA</span></div><div class="cap sm" id="c13"><span class="y">눈 경고</span> 넣게 했어요</div><div class="cap " id="c14"><span class="y">드물지만</span></div><div class="cap sm" id="c15">한쪽 <span class="y">눈</span>이 갑자기</div><div class="cap sm" id="c16">아프지 않게 흐려짐</div><div class="cap " id="c17">바로 <span class="y">의사</span>에게</div><div class="cap " id="c18">들고 오기 전엔</div><div class="cap sm" id="c19"><span class="y">허가받은 약</span>인지</div><div class="cap " id="c20">먼저 확인</div><div class="cap sm endc" id="c21">약·식품 소식, <span class="y">근거</span>로만</div><div class="cap sm endc" id="c22">지금 <span class="y">팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v056/r1/voice.mp3" data-start="0" data-duration="47.2" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="47.2" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 3.52], [1, 3.52, 5.6], [2, 5.6, 7.84], [3, 7.84, 9.92], [4, 9.92, 11.92], [5, 11.92, 13.92], [6, 13.92, 16.16], [7, 16.16, 17.92], [8, 17.92, 20.48], [9, 20.48, 22.56], [10, 22.56, 24.08], [11, 24.08, 27.52], [12, 27.52, 29.44], [13, 29.44, 31.92], [14, 31.92, 33.8], [15, 33.8, 36.32], [16, 36.32, 38.6], [17, 38.6, 40.08], [18, 40.08, 47.2]];
+S.forEach(([i,a,b])=>{const id='#s'+i,dir=i%2?1:-1;
+ tl.set(id,{opacity:1},a);
+ tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+ tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+ if(i<S.length-1) tl.set(id,{opacity:0},b);});
+const C=[[0, 0, 3.52], [1, 3.52, 4.32], [2, 4.32, 5.6], [3, 5.6, 7.84], [4, 7.84, 9.92], [5, 9.92, 11.92], [6, 11.92, 13.92], [7, 13.92, 15.36], [8, 15.36, 17.92], [9, 17.92, 20.48], [10, 20.48, 21.8], [11, 21.8, 24.08], [12, 24.08, 27.52], [13, 27.52, 29.44], [14, 29.44, 30.44], [15, 30.44, 31.52], [16, 31.52, 33.8], [17, 33.8, 36.32], [18, 36.32, 37.44], [19, 37.44, 38.6], [20, 38.6, 40.08], [21, 40.08, 43.24], [22, 43.24, 47.2]];
+C.forEach(([i,a,b])=>{const el='#c'+i;
+ if(i===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+ if(i<C.length-1) tl.set(el,{autoAlpha:0},b);});
+tl.set('#hook',{autoAlpha:1},0).set('#hook',{autoAlpha:0},5.6);
+tl.fromTo('#n12',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},7.84).set('#n12',{autoAlpha:0},9.92);
+tl.fromTo('#nstop',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},11.92).set('#nstop',{autoAlpha:0},13.92);
+tl.set('#chips',{autoAlpha:1},15.36);
+[['#a1',15.36],['#a2',17.92]].forEach(([e,t])=>tl.fromTo(e,{autoAlpha:0,y:60,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.25,ease:'back.out(2.2)'},t));
+tl.set('#chips',{autoAlpha:0},20.48);
+[['#w1',20.48],['#w2',21.8]].forEach(([w,t])=>tl.fromTo(w,{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},t));
+tl.set(['#w1','#w2'],{autoAlpha:0},24.08);
+tl.set('#cool',{opacity:0.35},24.08).to('#cool',{opacity:0,duration:0.8},24.13);
+tl.fromTo('#nfda',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},27.52).set('#nfda',{autoAlpha:0},29.44);
+tl.fromTo('#sym',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},30.44).set('#sym',{autoAlpha:0},36.32);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},37.44).set('#label',{autoAlpha:0},40.08);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3},40.14);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},40.14);
+const E=43.24;
+tl.to('#share',{autoAlpha:0,duration:0.2},E);
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.25);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.3).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.3);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.3);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.8);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.4);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.45).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.45);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.5);
+[['#h1',E+2.55],['#h2',E+2.7],['#h3',E+2.85]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.5,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.25},t+0.5));
+tl.to('#tap',{autoAlpha:0,duration:0.2},E+3.5);
+tl.set({},{},47.2);
+window.__timelines=window.__timelines||{};
+window.__timelines.r056=tl;
+</script>
+</body></html>
