@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0,#hook{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FF6FA8;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FF6FA8}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:290px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:48px;font-weight:800;color:#8A8274}
+.wc .g{font-size:60px;font-weight:900;color:#1A1A1A;letter-spacing:-3px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#FF6FA8}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FF6FA8;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FF6FA8,#E04C8C,#FF6FA8)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FF6FA8;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,111,168,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FF6FA8;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FF6FA8;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1290px}
+.chips{left:50px;right:50px;top:470px;display:flex;gap:14px}
+.chip{flex:1;background:#FBF6EC;border-radius:28px;padding:26px 0;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);opacity:0}
+.chip .w{font-size:30px;font-weight:800;color:#8A8274}.chip .g{font-size:60px;font-weight:900;color:#1A1A1A;letter-spacing:-3px}
+.bign{left:0;right:0;top:430px;text-align:center}
+.bign .n{display:inline-block;background:#FF6FA8;color:#111;font-weight:900;font-size:200px;padding:0 50px;border-radius:40px;letter-spacing:-8px;line-height:1.15;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bign .l{display:block;color:#fff;font-weight:900;font-size:64px;margin-top:20px;text-shadow:0 4px 20px rgba(0,0,0,.9)}
+.bign .n.w{background:#FBF6EC;color:#1A1A1A}
+#n16 .n{font-size:150px}
+#n16 .l{font-size:54px}
+.tint{position:absolute;inset:0;background:#FF6FA8;mix-blend-mode:multiply;opacity:0;z-index:2}
+#label{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:600;font-size:52px;color:#4A4438;line-height:1.6}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FF6FA8 55%)}
+#neq{left:70px;right:70px;top:440px;background:#FBF6EC;border-radius:40px;padding:44px 46px;box-shadow:0 20px 60px rgba(0,0,0,.55);text-align:center}
+#neq .a{font-weight:900;font-size:72px;color:#1A1A1A;letter-spacing:-3px}
+#neq .x{font-weight:900;font-size:100px;color:#E8664D;line-height:1.1}
+#neq .b2{font-weight:900;font-size:84px;color:#E8664D;letter-spacing:-3px}
+#share{left:60px;right:60px;top:300px;text-align:center;color:#fff;font-weight:900;font-size:52px}
+#share span{background:#FF6FA8;color:#111;padding:6px 22px;border-radius:999px}
+</style></head>
+<body>
+<main id="reel" data-composition-id="r058" data-width="1080" data-height="1920" data-duration="49.6">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-03.jpg"><div class="shade"></div></div><div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib095.jpg"><div class="shade"></div></div><div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-04.jpg"><div class="shade"></div></div><div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ph-egg-06.jpg"><div class="shade"></div></div><div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib095.jpg"><div class="shade"></div></div><div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib122.jpg"><div class="shade"></div></div><div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ph-tofu-04.jpg"><div class="shade"></div></div><div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ib113.jpg"><div class="shade"></div></div><div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-02.jpg"><div class="shade"></div></div><div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-04.jpg"><div class="shade"></div></div><div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib031.jpg"><div class="shade"></div></div><div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-03.jpg"><div class="shade"></div></div><div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ph-egg-06.jpg"><div class="shade"></div></div><div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ph-tofu-04.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">이번 주 건강 이슈 13</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov bign" id="hook"><span class="n">쥐·파리</span><span class="l">‘덜 늙는다’ 근거, 대부분 동물 실험</span></div>
+<div class="ov bign" id="n350"><span class="n w">350편+</span><span class="l">연구를 모아 정리한 리뷰</span></div>
+<div class="ov" id="neq"><div class="a">사람을 오래 본 연구</div><div class="x">↓</div><div class="b2">아직 없어요</div></div>
+<div class="ov chips" id="chips"><div class="chip" id="a1"><div class="w">줄이기 ✕</div><div class="g">노인</div></div><div class="chip" id="a2"><div class="w">줄이기 ✕</div><div class="g">임산부</div></div><div class="chip" id="a3"><div class="w">줄이기 ✕</div><div class="g">아이</div></div></div>
+<div class="ov bign" id="n16"><span class="n">1.2~1.6g</span><span class="l">몸무게 1kg당 하루 (미국 식사지침)</span></div>
+<div class="wc" id="w50" style="left:60px"><div class="w">50kg</div><div class="g">60~80g</div></div>
+<div class="wc on" id="w60" style="left:395px"><div class="w">60kg</div><div class="g">72~96g</div></div>
+<div class="wc" id="w70" style="left:730px"><div class="w">70kg</div><div class="g">84~112g</div></div>
+<div class="ov" id="label"><div class="t">매끼 하나씩 <span>예시</span></div><div class="r">아침 달걀<br>점심 생선·고기<br>저녁 <span class="mk">두부·콩</span></div></div>
+<div class="ov" id="share"><span>✈ 필요한 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">팔로우하면</div><div class="t"><span>근육 지키는</span><br>단백질 정보, 매일</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap" id="c0">단백질 줄이면</div><div class="cap" id="c1">덜 늙는다?</div><div class="cap" id="c2">대부분 <span class="y">쥐·파리</span></div><div class="cap" id="c3">얘기예요</div><div class="cap sm" id="c4"><span class="y">위스콘신대</span> 연구팀</div><div class="cap sm" id="c5">연구 <span class="y">350편</span> 넘게</div><div class="cap sm" id="c6">단백질 줄이면 <span class="y">오래 산다</span></div><div class="cap" id="c7">정리했는데요</div><div class="cap sm" id="c8">근거 대부분 <span class="y">동물 실험</span></div><div class="cap sm" id="c9">사람을 오래 본 연구는</div><div class="cap" id="c10"><span class="y">아직 없어요</span></div><div class="cap sm" id="c11">연구자도 <span class="y">인정</span>했어요</div><div class="cap sm" id="c12"><span class="y">노인·임산부·아이</span></div><div class="cap sm" id="c13">줄이기 <span class="y">권하지 않아요</span></div><div class="cap sm" id="c14">미국 <span class="y">새 식사지침</span>은</div><div class="cap sm" id="c15">오히려 <span class="y">더</span> 챙기라고</div><div class="cap" id="c16">권해요</div><div class="cap sm" id="c17">60kg면 하루 <span class="y">72~96g</span></div><div class="cap sm" id="c18">기사만 보고 <span class="y">줄이지 마세요</span></div><div class="cap sm" id="c19">매끼 <span class="y">단백질 식품</span> 하나</div><div class="cap sm endc" id="c20">근육 지키는 정보, <span class="y">매일</span></div><div class="cap sm endc" id="c21">지금 <span class="y">프로필</span> 눌러서 <span class="y">팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v058/r1/voice.mp3" data-start="0" data-duration="49.6" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="49.6" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0,0,3.04],[1,3.04,5.68],[2,5.68,9.76],[3,9.76,13.04],[4,13.04,15.44],[5,15.44,18.64],[6,18.64,21.04],[7,21.04,25.76],[8,25.76,28.04],[9,28.04,32.72],[10,32.72,37.04],[11,37.04,39.44],[12,39.44,42.56],[13,42.56,49.6]];
+S.forEach(([i,a,b])=>{const id='#s'+i,dir=i%2?1:-1;
+ tl.set(id,{opacity:1},a);
+ tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+ tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+ if(i<S.length-1) tl.set(id,{opacity:0},b);});
+const C=[[0,0,1.48],[1,1.48,3.04],[2,3.04,4.6],[3,4.6,5.68],[4,5.68,7.28],[5,7.28,9.76],[6,9.76,11.72],[7,11.72,13.04],[8,13.04,15.44],[9,15.44,17.64],[10,17.64,18.64],[11,18.64,21.04],[12,21.04,23.44],[13,23.44,25.76],[14,25.76,28.04],[15,28.04,31.76],[16,31.76,32.72],[17,32.72,37.04],[18,37.04,39.44],[19,39.44,42.56],[20,42.56,45.64],[21,45.64,49.6]];
+C.forEach(([i,a,b])=>{const el='#c'+i;
+ if(i===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+ if(i<C.length-1) tl.set(el,{autoAlpha:0},b);});
+tl.set('#hook',{autoAlpha:1},0).fromTo('#hook .n',{scale:1.5},{scale:1,duration:0.35,ease:'power4.out'},0).set('#hook',{autoAlpha:0},5.68);
+tl.fromTo('#n350',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},7.28).set('#n350',{autoAlpha:0},9.76);
+tl.fromTo('#neq',{autoAlpha:0,scale:1.8},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},15.44).set('#neq',{autoAlpha:0},18.64);
+tl.set('#chips',{autoAlpha:1},21.04);
+[['#a1',21.04],['#a2',21.72],['#a3',22.56]].forEach(([e,t])=>tl.fromTo(e,{autoAlpha:0,y:60,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.25,ease:'back.out(2.2)'},t));
+tl.set('#chips',{autoAlpha:0},25.76);
+tl.fromTo('#n16',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},28.04).set('#n16',{autoAlpha:0},32.72);
+[['#w50',32.72],['#w60',33.12],['#w70',33.6]].forEach(([w,t])=>tl.fromTo(w,{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},t));
+tl.set(['#w50','#w60','#w70'],{autoAlpha:0},37.04);
+tl.set('#cool',{opacity:0.35},37.04).to('#cool',{opacity:0,duration:0.8},37.09);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},39.44).set('#label',{autoAlpha:0},42.56);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},42.56).to('#share',{autoAlpha:0,duration:0.3},45.4);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},42.62);
+const E=45.64;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.25);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.3).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.3);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.3);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.8);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.4);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.45).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.45);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.5);
+[['#h1',E+2.55],['#h2',E+2.7],['#h3',E+2.85]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.5,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.25},t+0.5));
+tl.to('#tap',{autoAlpha:0,duration:0.2},E+3.5);
+tl.set({},{},49.6);
+window.__timelines=window.__timelines||{};
+window.__timelines.r058=tl;
+</script>
+</body></html>
