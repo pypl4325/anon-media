@@ -1,0 +1,166 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#3DDC97;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;word-break:keep-all;
+ text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#3DDC97}
+.ov{position:absolute;opacity:0;z-index:7}
+.lbl{left:110px;right:110px;top:470px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lbl .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+.lbl .t span{font-size:30px;font-weight:600;color:#8A8274}
+.lbl .r{font-weight:600;font-size:40px;color:#4A4438;line-height:1.5}
+.lbl .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#3DDC97 55%)}
+.wc{position:absolute;top:500px;width:420px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:44px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#3DDC97}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#3DDC97;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#3DDC97 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#3DDC97,#2BB37A,#3DDC97)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#3DDC97;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(61,220,151,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #3DDC97;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#3DDC97;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+*{word-break:keep-all}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#3DDC97;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.w{background:#fff}
+.big .n.d{background:#1A1A1A;color:#3DDC97;border:5px solid #3DDC97}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#share{left:60px;right:60px;top:300px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#3DDC97;font-weight:900;font-size:50px;padding:14px 34px;border-radius:999px;letter-spacing:-1.5px}
+</style>
+<style>#label .r,#label2 .r{font-size:44px}#cmp{left:70px;right:70px;top:430px;display:flex;gap:26px}#cmp .bx{flex:1;background:#FBF6EC;border-radius:34px;padding:36px 30px;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.5)}#cmp .k{font-size:40px;font-weight:800;color:#8A8274}#cmp .v{font-size:64px;font-weight:900;color:#1A1A1A;line-height:1.3;margin-top:10px;letter-spacing:-2px}#eq{left:0;right:0;top:820px;text-align:center}#eq span{display:inline-block;background:#1A1A1A;color:#3DDC97;font-weight:900;font-size:64px;padding:16px 40px;border-radius:999px}</style>
+</head><body>
+<main id="reel" data-composition-id="r061" data-width="1080" data-height="1920" data-duration="48.2">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-01.jpg" style="object-position:50% 60%"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-02.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib048.jpg" style="object-position:50% 30%"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib016.jpg" style="object-position:50% 35%"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-nuts-04.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-05.jpg" style="object-position:30% 50%"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib078.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-05.jpg" style="object-position:70% 50%"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-01.jpg" style="object-position:30% 60%"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ib048.jpg" style="object-position:50% 20%"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ph-nuts-04.jpg" style="object-position:30% 50%"><div class="shade"></div></div>
+<div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-02.jpg" style="object-position:40% 50%"><div class="shade"></div></div>
+<div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ph-protein-06.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ib134.jpg" style="object-position:50% 30%"><div class="shade"></div></div>
+<div class="top"><div class="badge">단백질 상식 9</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov big" id="n0"><div class="n">372명</div><span class="l">근력운동 초보 성인 · 연구 5편</span></div>
+<div class="ov" id="cmp"><div class="bx"><div class="k">유청</div><div class="v">근육량 ↑<br>체지방 ↓</div></div><div class="bx"><div class="k">콩·완두</div><div class="v">근육량 ↑<br>체지방 ↓</div></div></div><div class="ov" id="eq"><span>차이 없음</span></div>
+<div class="ov lbl" id="label"><div class="t">예외 <span>1편</span></div><div class="r">9개월·하루 약 22g 연구에선<br><span class="mk">유청</span> 쪽 근육량이 조금 더</div></div>
+<div class="ov big" id="n1"><div class="n">18~25g</div><span class="l">운동 직후 1회 · 반응 최고</span></div>
+<div class="wc" id="k1" style="left:90px;width:420px"><div class="w">유청 분리</div><div class="g">19g</div></div><div class="wc on" id="k2" style="left:570px;width:420px"><div class="w">콩 분리</div><div class="g">26g</div></div>
+<div class="ov" id="eq2" style="left:0;right:0;top:820px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.65);color:#fff;font-weight:900;font-size:52px;padding:14px 34px;border-radius:999px">류신 2g 같게 · 12주 뒤 비슷</span></div>
+<div class="ov lbl" id="label2"><div class="t">뒷면 볼 곳 <span>1곳</span></div><div class="r">영양정보 <span class="mk">1회 단백질 g</span><br>18~25g, 콩·완두면 20g 넘게</div></div>
+<div class="ov" id="share"><span>✈ 우유 마시면 배 아픈 친구에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">팔로우할 이유</div><div class="t"><span>단백질 고르는 법</span>,<br>하나씩 쌓아 가요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">콩·완두 단백질도</div>
+<div class="cap " id="c1"><span class='y'>유청만큼</span></div>
+<div class="cap sm" id="c2">근육 <span class='y'>붙었어요</span></div>
+<div class="cap sm" id="c3">근력운동 처음 시작한</div>
+<div class="cap " id="c4">성인 <span class='y'>372명</span></div>
+<div class="cap " id="c5">연구 <span class='y'>5편</span></div>
+<div class="cap sm" id="c6">두 쪽 다 <span class='y'>근육량↑</span></div>
+<div class="cap sm" id="c7"><span class='y'>체지방↓</span></div>
+<div class="cap sm" id="c8">차이가 <span class='y'>없었어요</span></div>
+<div class="cap " id="c9">단,</div>
+<div class="cap sm" id="c10"><span class='y'>9개월</span> 연구 1편은</div>
+<div class="cap sm" id="c11">유청이 <span class='y'>조금 더</span></div>
+<div class="cap sm" id="c12">그래서 기준은</div>
+<div class="cap " id="c13"><span class='y'>양</span>이에요</div>
+<div class="cap sm" id="c14">운동 직후 한 번에</div>
+<div class="cap " id="c15"><span class='y'>18~25g</span></div>
+<div class="cap sm" id="c16">근육 합성 반응 <span class='y'>최고</span></div>
+<div class="cap sm" id="c17">콩은 <span class='y'>조금 더</span></div>
+<div class="cap " id="c18">유청 <span class='y'>19g</span></div>
+<div class="cap " id="c19">콩 <span class='y'>26g</span></div>
+<div class="cap sm" id="c20">효과가 <span class='y'>비슷</span>했어요</div>
+<div class="cap sm" id="c21">쉐이크 살 때</div>
+<div class="cap sm" id="c22"><span class='y'>뒷면</span>에서</div>
+<div class="cap sm" id="c23"><span class='y'>1회 단백질 g</span> 확인!</div>
+<div class="cap sm endc" id="c24">단백질 고르는 법</div>
+<div class="cap sm endc" id="c25"><span class='y'>하나씩</span> 쌓아 가요</div>
+<div class="cap sm endc" id="c26">지금 프로필 눌러서</div>
+<div class="cap sm endc" id="c27"><span class='y'>팔로우</span>해 두세요!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v061/r1/voice.mp3" data-start="0" data-duration="48.2" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="48.2" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 2.08], [1, 2.08, 5.76], [2, 5.76, 9.52], [3, 9.52, 11.44], [4, 11.44, 14.08], [5, 14.08, 16.48], [6, 16.48, 20.72], [7, 20.72, 23.2], [8, 23.2, 26.4], [9, 26.4, 29.52], [10, 29.52, 31.52], [11, 31.52, 36.88], [12, 36.88, 41.52], [13, 41.52, 48.2]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 2.08], [1, 2.08, 4.24], [2, 4.24, 5.76], [3, 5.76, 7.44], [4, 7.44, 9.52], [5, 9.52, 11.44], [6, 11.44, 13.52], [7, 13.52, 14.8], [8, 14.8, 16.48], [9, 16.48, 17.04], [10, 17.04, 18.72], [11, 18.72, 20.72], [12, 20.72, 22.08], [13, 22.08, 23.2], [14, 23.2, 24.72], [15, 24.72, 26.96], [16, 26.96, 29.52], [17, 29.52, 31.52], [18, 31.52, 33.12], [19, 33.12, 34.48], [20, 34.48, 36.88], [21, 36.88, 37.84], [22, 37.84, 38.8], [23, 38.8, 41.52], [24, 41.52, 42.96], [25, 42.96, 44.48], [26, 44.48, 46.8], [27, 46.8, 48.2]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.fromTo('#n0',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},7.92).set('#n0',{autoAlpha:0},11.44);
+tl.fromTo('#cmp .bx:nth-child(1)',{autoAlpha:0,x:-200},{autoAlpha:1,x:0,duration:0.3,ease:'back.out(1.8)'},11.44);
+tl.fromTo('#cmp .bx:nth-child(2)',{autoAlpha:0,x:200},{autoAlpha:1,x:0,duration:0.3,ease:'back.out(1.8)'},11.9);
+tl.set('#cmp',{autoAlpha:1},11.44);
+tl.fromTo('#eq',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(2.5)'},14.8);
+tl.set(['#cmp','#eq'],{autoAlpha:0},16.48);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},17.04).set('#label',{autoAlpha:0},20.72);
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},24.72).set('#n1',{autoAlpha:0},29.52);
+[['#k1',31.52],['#k2',33.12]].forEach(([w,t])=>tl.fromTo(w,{autoAlpha:0,y:80,scale:0.7},{autoAlpha:1,y:0,scale:1,duration:0.3,ease:'back.out(2.2)'},t));
+tl.to('#k2',{scale:1.1,duration:0.2,yoyo:true,repeat:1},33.6);
+tl.fromTo('#eq2',{autoAlpha:0,y:40},{autoAlpha:1,y:0,duration:0.25},34.48);
+tl.set(['#k1','#k2','#eq2'],{autoAlpha:0},36.88);
+tl.fromTo('#label2',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},37.84).set('#label2',{autoAlpha:0},41.52);
+tl.fromTo('#share',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},41.52).set('#share',{autoAlpha:0},44.48);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},41.52);
+const E=44.48;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.45).to('#tap',{autoAlpha:1,duration:0.15},E+0.45);
+tl.to('#tap',{x:150,y:788,duration:0.45,ease:'power2.out'},E+0.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.97);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+1.0).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+1.0);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+1.0);
+tl.to('#tap',{x:465,y:983,duration:0.5,ease:'power2.inOut'},E+1.5);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.5);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+2.05);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+2.1).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+2.1);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+2.15);
+[['#h1',E+2.2],['#h2',E+2.35],['#h3',E+2.5]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.9);
+tl.set({},{},48.2);
+window.__timelines=window.__timelines||{};
+window.__timelines.r061=tl;
+</script>
+</body></html>
