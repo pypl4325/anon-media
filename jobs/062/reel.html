@@ -1,0 +1,158 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif;word-break:keep-all}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#A78BFA;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#A78BFA}
+.ov{position:absolute;opacity:0;z-index:7}
+.wc{position:absolute;top:500px;width:420px;background:#FBF6EC;border-radius:34px;padding:34px 0;text-align:center;opacity:0;z-index:7;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.wc .w{font-size:44px;font-weight:800;color:#8A8274}
+.wc .g{font-size:96px;font-weight:900;color:#1A1A1A;letter-spacing:-4px;margin-top:6px}
+.wc.on{background:#1A1A1A}.wc.on .w{color:#CFC6B4}.wc.on .g{color:#A78BFA}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#A78BFA;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#A78BFA,#D6C8FF,#A78BFA)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#A78BFA;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(167,139,250,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #A78BFA;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#A78BFA;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#A78BFA;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.w{background:#fff}
+.big .n.d{background:#1A1A1A;color:#A78BFA;border:5px solid #A78BFA}
+.big .n.s{font-size:150px;letter-spacing:-6px}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#share{left:60px;right:60px;top:300px;text-align:center}
+#share span{display:inline-block;background:rgba(0,0,0,.6);color:#A78BFA;font-weight:900;font-size:50px;padding:14px 34px;border-radius:999px;letter-spacing:-1.5px}
+#hook{left:60px;right:60px;top:300px;text-align:center;opacity:1;z-index:8}
+#hook .a{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:900;font-size:62px;line-height:1.25;padding:22px 40px;border-radius:30px;letter-spacing:-2px}
+#hook .a b{color:#A78BFA}
+.tint{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+#hot{background:linear-gradient(180deg,rgba(255,80,40,.65),rgba(180,30,10,.55))}
+#cool{background:linear-gradient(180deg,rgba(167,139,250,.5),rgba(60,30,120,.4))}
+#combo{left:70px;right:70px;top:420px;background:#FBF6EC;border-radius:36px;padding:40px 46px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#combo .k{font-weight:800;font-size:36px;color:#8A8274;margin-bottom:18px}
+#combo .i{font-weight:900;font-size:62px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3;opacity:0}
+#combo .i b{color:#A78BFA}
+#stamp{left:0;right:0;top:520px;text-align:center}
+#stamp span{display:inline-block;border:10px solid #FF5A4E;color:#FF5A4E;background:rgba(255,255,255,.9);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-8deg)}
+#obs{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#obs .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+#combo .i{margin-top:6px}
+#obs2{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs2 .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs2 .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#obs2 .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+</style></head><body>
+<main id="reel" data-composition-id="r062" data-width="1080" data-height="1920" data-duration="30.4">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-06.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib037.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-07.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib036.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-senior-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib117.jpg"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-04.jpg"><div class="shade"></div></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-03.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ib098.jpg"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ph-supplement-01.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">영양제 상식 8</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="hook"><div class="a">노화 늦추는 영양제?<br><b>51개 연구엔 효과 없었어요</b></div></div>
+<div class="ov big" id="n1"><div class="n">51개</div><span class="l">사람 대상 연구 모아 보니</span></div>
+<div class="ov" id="stamp"><span style="font-size:96px">뚜렷한 효과 ✕</span></div>
+<div class="ov" id="combo"><div class="k">노화 지표를 낮춘 것</div><div class="i" id="i1">✓ <b>식단</b></div><div class="i" id="i2">✓ <b>운동</b></div><div class="i" id="i3">✓ <b>병원 약</b> <span style="font-size:40px;color:#8A8274">(처방 영역)</span></div></div>
+<div class="ov" id="obs"><div class="t"><span>지중해식 식단</span></div><div class="s">건강한 사람 대상 두 연구,<br>같은 지표가 줄었어요</div></div>
+<div class="ov" id="obs2"><div class="t">지표 ↓ = <span>오래 산다?</span></div><div class="s">아직 확인되지 않았어요</div></div>
+<div class="ov" id="next"><div class="k">댓글로 알려 주세요</div><div class="t">내 영양제,<br>하루 <span>몇 개</span>?</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">노화 늦추는 <span class='y'>영양제</span></div>
+<div class="cap " id="c1">사람 연구 <span class='y'>51개</span></div>
+<div class="cap sm" id="c2"><span class='y'>뚜렷한 효과</span> 없었어요</div>
+<div class="cap " id="c3">낮춘 건 <span class='y'>식단</span></div>
+<div class="cap " id="c4"><span class='y'>운동</span></div>
+<div class="cap " id="c5">그리고 <span class='y'>병원 약</span></div>
+<div class="cap " id="c6"><span class='y'>지중해식</span> 식단은</div>
+<div class="cap sm" id="c7">두 연구 모두 <span class='y'>같은 결과</span></div>
+<div class="cap sm" id="c8">영양제 <span class='y'>하나 대신</span></div>
+<div class="cap sm" id="c9"><span class='y'>채소·생선</span>부터 담기</div>
+<div class="cap sm" id="c10">다만 지표가 줄면</div>
+<div class="cap sm" id="c11">오래 사는지는 <span class='y'>아직 몰라요</span></div>
+<div class="cap sm endc" id="c12">내 영양제, <span class='y'>몇 개</span>?</div>
+<div class="cap sm endc" id="c13"><span class='y'>댓글</span> 남기고 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v062/r1/voice.mp3" data-start="0" data-duration="30.4" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="30.4" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 2.0], [1, 2.0, 4.36], [2, 4.36, 6.56], [3, 6.56, 8.6], [4, 8.6, 10.2], [5, 10.2, 11.76], [6, 11.76, 15.92], [7, 15.92, 17.6], [8, 17.6, 20.56], [9, 20.56, 24.64], [10, 24.64, 30.4]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 2.0], [1, 2.0, 4.36], [2, 4.36, 6.56], [3, 6.56, 8.6], [4, 8.6, 10.2], [5, 10.2, 11.76], [6, 11.76, 14.08], [7, 14.08, 15.92], [8, 15.92, 17.6], [9, 17.6, 20.56], [10, 20.56, 22.32], [11, 22.32, 24.64], [12, 24.64, 27.12], [13, 27.12, 30.4]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.set('#hook',{autoAlpha:1},0).to('#hook',{scale:1.06,duration:0.25,yoyo:true,repeat:1},0.3).to('#hook',{autoAlpha:0,duration:0.2},2.0);
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},2.05).set('#n1',{autoAlpha:0},4.36);
+tl.to('#cool',{opacity:1,duration:0.4},4.36).set('#cool',{opacity:0},6.56);
+tl.fromTo('#stamp',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},4.9).set('#stamp',{autoAlpha:0},6.56);
+tl.fromTo('#combo',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},6.6);
+tl.fromTo('#i1',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},8.1);
+tl.fromTo('#i2',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},8.9);
+tl.fromTo('#i3',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},10.3);
+tl.set('#combo',{autoAlpha:0},11.76);
+tl.fromTo('#obs',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},12.0).set('#obs',{autoAlpha:0},15.92);
+tl.fromTo('#obs2',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)'},21.1).set('#obs2',{autoAlpha:0},24.64);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},24.7);
+const E=27.2;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.4).to('#tap',{autoAlpha:1,duration:0.15},E+0.4);
+tl.to('#tap',{x:150,y:788,duration:0.4,ease:'power2.out'},E+0.45);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.85);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.9).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+0.9);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+0.9);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.3);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.3);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.8);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.85).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+1.85);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.9);
+[['#h1',E+1.95],['#h2',E+2.1],['#h3',E+2.25]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.8);
+tl.set({},{},30.4);
+window.__timelines=window.__timelines||{};
+window.__timelines.r062=tl;
+</script>
+</body></html>
