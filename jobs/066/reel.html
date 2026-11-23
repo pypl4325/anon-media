@@ -1,0 +1,155 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif;word-break:keep-all}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#A78BFA;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#A78BFA}
+.ov{position:absolute;opacity:0;z-index:7}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#A78BFA;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#A78BFA,#D6C8FF,#A78BFA)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#A78BFA;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(167,139,250,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #A78BFA;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#A78BFA;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#A78BFA;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.s{font-size:150px;letter-spacing:-6px}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#hook{left:60px;right:60px;top:300px;text-align:center;opacity:1;z-index:8}
+#hook .a{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:900;font-size:62px;line-height:1.25;padding:22px 40px;border-radius:30px;letter-spacing:-2px}
+#hook .a b{color:#A78BFA}
+.tint{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+#cool{background:linear-gradient(180deg,rgba(167,139,250,.5),rgba(60,30,120,.4))}
+#combo{left:70px;right:70px;top:420px;background:#FBF6EC;border-radius:36px;padding:40px 46px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#combo .k{font-weight:800;font-size:36px;color:#8A8274;margin-bottom:18px}
+#combo .i{font-weight:900;font-size:62px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3;opacity:0;margin-top:6px}
+#combo .i b{color:#A78BFA}
+#stamp{left:0;right:0;top:520px;text-align:center}
+#stamp span{display:inline-block;border:10px solid #E8664D;color:#E8664D;background:rgba(255,255,255,.9);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-8deg)}
+#obs{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs .t span{background:linear-gradient(180deg,transparent 58%,#A78BFA 58%)}
+#obs .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+#label{left:90px;right:90px;top:460px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:700;font-size:46px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#A78BFA 55%)}
+#stamp2{left:0;right:0;top:600px;text-align:center}
+.scene.pl{background:radial-gradient(circle at 50% 40%,#3B2A6B 0%,#140C2A 70%)}
+</style></head><body>
+<main id="reel" data-composition-id="r066" data-width="1080" data-height="1920" data-duration="30">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ib084.jpg"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib107.jpg"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib039.jpg"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib038.jpg"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib107.jpg"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ib084.jpg"><div class="shade"></div></div>
+<div class="scene pl" id="s6"></div>
+<div class="scene" id="s7"><img src="https://pypl4325.github.io/anon-media/bank/ib058.jpg"><div class="shade"></div></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-nuts-01.jpg"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ib084.jpg"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">영양제 상식 9</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="hook"><div class="a">자기 전 마그네슘?<br><b>2주 먹어도 잠은 그대로</b></div></div>
+<div class="ov" id="stamp"><span>그대로</span></div>
+<div class="ov big" id="n1"><div class="n">103명</div><span class="l">건강한 성인 · 2주 실험</span></div>
+<div class="ov" id="combo"><div class="k">저녁마다 먹은 조합(실험)</div><div class="i" id="i1">마그네슘 <b>145mg</b></div><div class="i" id="i2">+ 테아닌</div><div class="i" id="i3">+ 아피제닌</div></div>
+<div class="ov" id="obs"><div class="t"><span>수면 점수</span> 차이 없음</div><div class="s">가짜 약을 먹은 사람들과<br>달라지지 않았어요</div></div>
+<div class="ov big" id="n2"><div class="n">17분</div><span class="l">잠드는 시간 단축 · 어르신 151명</span></div>
+<div class="ov" id="stamp2"><span style="display:inline-block;border:10px solid #A78BFA;color:#fff;background:rgba(20,12,42,.85);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-6deg)">근거 약함</span></div>
+<div class="ov" id="label"><div class="t">영양성분 <span>예시</span></div><div class="r">마그네슘 L-트레온산 2g<br>→ 마그네슘으로서 <span class="mk">145mg</span></div></div>
+<div class="ov big" id="n3"><div class="n s">350mg</div><span class="l">영양제·약으로 하루 · 음식은 빼고</span></div>
+<div class="ov" id="next"><div class="k">댓글로 알려 주세요</div><div class="t">마그네슘,<br><span>언제</span> 드세요?</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">자기 전 <span class='y'>마그네슘</span></div>
+<div class="cap " id="c1">잠은 <span class='y'>그대로</span></div>
+<div class="cap sm" id="c2">건강한 성인 <span class='y'>103명</span></div>
+<div class="cap sm" id="c3">저녁마다 <span class='y'>마그네슘 조합</span></div>
+<div class="cap sm" id="c4">수면 점수 = <span class='y'>가짜 약</span></div>
+<div class="cap " id="c5">불면증 <span class='y'>어르신</span>은</div>
+<div class="cap sm" id="c6"><span class='y'>17분</span>쯤 빨리 잠듦</div>
+<div class="cap " id="c7">근거는 <span class='y'>약해요</span></div>
+<div class="cap sm" id="c8">뒷면 <span class='y'>마그네슘 양</span>부터</div>
+<div class="cap sm" id="c9">영양제는 <span class='y'>350mg</span>까지</div>
+<div class="cap sm endc" id="c10">언제 <span class='y'>드세요</span>?</div>
+<div class="cap sm endc" id="c11"><span class='y'>댓글</span> 남기고 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v066/r1/voice.mp3" data-start="0" data-duration="30" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="30" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0,0,2.0],[1,2.0,4.56],[2,4.56,6.44],[3,6.44,9.04],[4,9.04,12.36],[5,12.36,16.8],[6,16.8,18.4],[7,18.4,21.1],[8,21.1,24.76],[9,24.76,30.0]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  if(document.querySelector(id+' img')){
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);}
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0,0,2.0],[1,2.0,4.56],[2,4.56,6.44],[3,6.44,9.04],[4,9.04,12.36],[5,12.36,14.2],[6,14.2,16.8],[7,16.8,18.4],[8,18.4,21.1],[9,21.1,24.76],[10,24.76,26.6],[11,26.6,30.0]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.set('#hook',{autoAlpha:1},0).to('#hook',{scale:1.06,duration:0.25,yoyo:true,repeat:1},0.3).to('#hook',{autoAlpha:0,duration:0.2},2.0);
+tl.fromTo('#stamp',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},3.1).set('#stamp',{autoAlpha:0},4.56);
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},4.6).set('#n1',{autoAlpha:0},6.44);
+tl.fromTo('#combo',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},6.48);
+tl.fromTo('#i1',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},7.2);
+tl.fromTo('#i2',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},7.75);
+tl.fromTo('#i3',{autoAlpha:0,x:-60},{autoAlpha:1,x:0,duration:0.25,ease:'back.out(2)'},8.3);
+tl.set('#combo',{autoAlpha:0},9.04);
+tl.to('#cool',{opacity:1,duration:0.4},9.04).set('#cool',{opacity:0},12.36);
+tl.fromTo('#obs',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},9.4).set('#obs',{autoAlpha:0},12.36);
+tl.fromTo('#n2',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},13.6).set('#n2',{autoAlpha:0},16.8);
+tl.fromTo('#stamp2',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},17.0).set('#stamp2',{autoAlpha:0},18.4);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},18.5).set('#label',{autoAlpha:0},21.1);
+tl.fromTo('#n3',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},22.5).set('#n3',{autoAlpha:0},24.76);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},24.8);
+const E=26.7;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.4).to('#tap',{autoAlpha:1,duration:0.15},E+0.4);
+tl.to('#tap',{x:150,y:788,duration:0.4,ease:'power2.out'},E+0.45);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.85);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.9).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+0.9);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+0.9);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.3);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.3);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.8);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.85).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+1.85);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.9);
+[['#h1',E+1.95],['#h2',E+2.1],['#h3',E+2.25]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.8);
+tl.set({},{},30.0);
+window.__timelines=window.__timelines||{};
+window.__timelines.r066=tl;
+</script>
+</body></html>
