@@ -1,0 +1,160 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif;word-break:keep-all}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FF9F43;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FF9F43}
+.ov{position:absolute;opacity:0;z-index:7}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FF9F43;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FF9F43 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FF9F43,#FFD9AE,#FF9F43)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FF9F43;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,159,67,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FF9F43;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FF9F43;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#FF9F43;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.s{font-size:150px;letter-spacing:-6px}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#hook{left:60px;right:60px;top:300px;text-align:center;opacity:1;z-index:8}
+#hook .a{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:900;font-size:62px;line-height:1.25;padding:22px 40px;border-radius:30px;letter-spacing:-2px}
+#hook .a b{color:#FF9F43}
+.tint{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+#cool{background:linear-gradient(180deg,rgba(255,159,67,.35),rgba(70,35,5,.55))}
+#stamp{left:0;right:0;top:520px;text-align:center}
+#stamp span{display:inline-block;border:10px solid #E8664D;color:#E8664D;background:rgba(255,255,255,.9);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-8deg)}
+#obs{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs .t span{background:linear-gradient(180deg,transparent 58%,#FF9F43 58%)}
+#obs .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+#label{left:90px;right:90px;top:460px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:700;font-size:46px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FF9F43 55%)}
+.scene.pl{background:radial-gradient(circle at 50% 40%,#5A3410 0%,#1F1105 70%)}
+#obs .g{display:flex;gap:20px;justify-content:center;margin-top:24px}#obs .g div{background:#1A1A1A;color:#FF9F43;font-weight:900;font-size:44px;padding:14px 26px;border-radius:20px}
+#cmp{left:70px;right:70px;top:430px;display:flex;gap:24px}#cmp .b{flex:1;background:#FBF6EC;border-radius:36px;padding:40px 30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}#cmp .b.on{background:#1A1A1A}#cmp .k{font-weight:800;font-size:36px;color:#8A8274}#cmp .b.on .k{color:#CFC6B4}#cmp .v{font-weight:900;font-size:74px;color:#1A1A1A;letter-spacing:-3px;margin-top:14px;line-height:1.15}#cmp .b.on .v{color:#FF9F43}#cmp .vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#FF9F43;color:#111;font-weight:900;font-size:40px;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+</style></head><body>
+<main id="reel" data-composition-id="r068" data-width="1080" data-height="1920" data-duration="47.0">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-run-03.jpg" style="object-position:62% 50%"><div class="shade"></div></div>
+<div class="scene pl" id="s1"></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib009.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene pl" id="s3"></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ib110.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s5"><img src="https://pypl4325.github.io/anon-media/bank/ph-banchan-02.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s6"><img src="https://pypl4325.github.io/anon-media/bank/ib051.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene pl" id="s7"></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ib054.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-banchan-01.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s10"><img src="https://pypl4325.github.io/anon-media/bank/ib131.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s11"><img src="https://pypl4325.github.io/anon-media/bank/ib033.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">식단·다이어트 상식 9</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="hook"><div class="a">밥 먹고 10분 걷기,<br><b>식후 혈당 12% 낮았어요</b></div></div>
+<div class="ov big" id="n1"><div class="n">−12%</div><span class="l">식후 혈당 · 세 끼 뒤 10분씩</span></div>
+<div class="ov big" id="n2"><div class="n">41명</div><span class="l">2형 당뇨 · 평균 60세</span></div>
+<div class="ov" id="cmp"><div class="b"><div class="k">하루 한 번</div><div class="v">30분<br>걷기</div></div><div class="vs">vs</div><div class="b on"><div class="k">세 끼 뒤</div><div class="v">10분씩<br>걷기</div></div></div>
+<div class="ov big" id="n3"><div class="n">−22%</div><span class="l">저녁 먹고 10분 걸었을 때</span></div>
+<div class="ov big" id="n4"><div class="n s">연구 7개</div><span class="l">오래 앉기를 걷기로 끊은 실험</span></div>
+<div class="ov" id="obs"><div class="t"><span>가볍게 걷기</span></div><div class="g"><div>혈당 ↓</div><div>인슐린 ↓</div></div><div class="s">계속 앉아 있을 때와 비교</div></div>
+<div class="ov" id="stamp"><span style="border-color:#FF9F43;color:#FF9F43">식후 10분</span></div>
+<div class="ov" id="label"><div class="t">잠깐! <span>혈당 낮추는 약을 쓴다면</span></div><div class="r">인슐린 등은 저혈당이 올 수 있어요<br><span class="mk">의사와 먼저 상의</span></div></div>
+<div class="ov" id="next"><div class="k">여러분은 어떠세요?</div><div class="t">밥 먹고 보통<br><span>뭐 하세요?</span></div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">밥 먹고 <span class='y'>10분</span> 걷기</div>
+<div class="cap sm" id="c1">하루 <span class='y'>30분</span> 한 번보다</div>
+<div class="cap sm" id="c2">식후 혈당 <span class='y'>12%</span> 낮음</div>
+<div class="cap sm" id="c3">당뇨 있는 <span class='y'>41명</span></div>
+<div class="cap sm" id="c4"><span class='y'>2주씩</span> 두 방법</div>
+<div class="cap sm" id="c5">하루 <span class='y'>30분</span>은 똑같이</div>
+<div class="cap sm" id="c6">다른 건 <span class='y'>타이밍</span></div>
+<div class="cap sm" id="c7"><span class='y'>저녁</span> 먹고 걸으면</div>
+<div class="cap sm" id="c8">제일 <span class='y'>많이</span> 먹고</div>
+<div class="cap sm" id="c9">제일 <span class='y'>오래</span> 앉아요</div>
+<div class="cap sm" id="c10">연구 <span class='y'>7개</span> 분석</div>
+<div class="cap sm" id="c11"><span class='y'>가볍게</span> 걸으면</div>
+<div class="cap sm" id="c12">혈당 <span class='y'>덜</span> 올라요</div>
+<div class="cap sm" id="c13"><span class='y'>설거지</span> 끝나고</div>
+<div class="cap sm" id="c14">동네 한 바퀴 <span class='y'>10분</span></div>
+<div class="cap sm" id="c15"><span class='y'>혈당약</span> 먹는다면</div>
+<div class="cap sm" id="c16">의사와 <span class='y'>먼저</span> 상의</div>
+<div class="cap sm endc" id="c17">밥 먹고 <span class='y'>뭐</span> 하세요?</div>
+<div class="cap sm endc" id="c18"><span class='y'>댓글</span>로 남겨 주세요</div>
+<div class="cap sm endc" id="c19">프로필 눌러 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v068/r1/voice.mp3" data-start="0" data-duration="47.0" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="47.0" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 4.16], [1, 4.16, 7.2], [2, 7.2, 9.36], [3, 9.36, 14.56], [4, 14.56, 16.64], [5, 16.64, 20.4], [6, 20.4, 24.16], [7, 24.16, 26.4], [8, 26.4, 30.8], [9, 30.8, 35.6], [10, 35.6, 38.96], [11, 38.96, 47.0]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  if(document.querySelector(id+' img')){
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);}
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 2.0], [1, 2.0, 4.16], [2, 4.16, 7.2], [3, 7.2, 9.36], [4, 9.36, 11.84], [5, 11.84, 14.56], [6, 14.56, 16.64], [7, 16.64, 20.4], [8, 20.4, 22.08], [9, 22.08, 24.16], [10, 24.16, 26.4], [11, 26.4, 28.9], [12, 28.9, 30.8], [13, 30.8, 32.84], [14, 32.84, 35.6], [15, 35.6, 36.96], [16, 36.96, 38.96], [17, 38.96, 41.72], [18, 41.72, 43.0], [19, 43.0, 47.0]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+tl.set('#hook',{autoAlpha:1},0).to('#hook',{scale:1.06,duration:0.25,yoyo:true,repeat:1},0.3).to('#hook',{autoAlpha:0,duration:0.2},4.16);
+tl.fromTo('#n1',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},4.3).set('#n1',{autoAlpha:0},7.2);
+tl.fromTo('#n2',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},8.2).set('#n2',{autoAlpha:0},9.36);
+tl.fromTo('#cmp .b:first-child',{autoAlpha:0,x:-200},{autoAlpha:1,x:0,duration:0.3,ease:'back.out(1.6)'},9.5);
+tl.fromTo('#cmp .b.on',{autoAlpha:0,x:200},{autoAlpha:1,x:0,duration:0.3,ease:'back.out(1.6)'},10.1);
+tl.set('#cmp',{autoAlpha:1},9.5).fromTo('#cmp .vs',{scale:0},{scale:1,duration:0.25,ease:'back.out(3)'},10.5).set('#cmp',{autoAlpha:0},14.56);
+tl.to('#cool',{opacity:1,duration:0.4},14.56).set('#cool',{opacity:0},16.64);
+tl.fromTo('#n3',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},18.0).set('#n3',{autoAlpha:0},20.4);
+tl.fromTo('#n4',{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},24.3).set('#n4',{autoAlpha:0},26.4);
+tl.fromTo('#obs',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},27.0).set('#obs',{autoAlpha:0},30.8);
+tl.fromTo('#stamp',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},33.9).set('#stamp',{autoAlpha:0},35.6);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},35.7).set('#label',{autoAlpha:0},38.96);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},39.0);
+const E=43.0;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.4).to('#tap',{autoAlpha:1,duration:0.15},E+0.4);
+tl.to('#tap',{x:150,y:788,duration:0.4,ease:'power2.out'},E+0.45);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.85);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.9).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+0.9);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+0.9);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.3);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.3);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.8);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.85).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+1.85);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.9);
+[['#h1',E+1.95],['#h2',E+2.1],['#h3',E+2.25]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.8);
+tl.set({},{},47.0);
+window.__timelines=window.__timelines||{};
+window.__timelines.r068=tl;
+</script>
+</body></html>
