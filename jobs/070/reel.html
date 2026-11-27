@@ -1,0 +1,170 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+*{box-sizing:border-box;font-family:Pretendard,'Noto Sans KR',sans-serif;word-break:keep-all}
+#reel{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+#s0,#c0{opacity:1}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.75) 100%)}
+.top{position:absolute;top:150px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;z-index:8}
+.badge{background:#FF6FA8;color:#111;font-weight:900;font-size:42px;padding:14px 30px;border-radius:999px;letter-spacing:-1px}
+.brand{color:#fff;opacity:.85;font-weight:700;font-size:30px}
+.cap{position:absolute;left:56px;right:56px;top:1140px;text-align:center;color:#fff;font-weight:900;font-size:96px;line-height:1.15;letter-spacing:-3px;opacity:0;z-index:9;text-shadow:0 0 18px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.85),0 -2px 0 rgba(0,0,0,.6)}
+.cap.sm{font-size:80px}
+.y{color:#FF6FA8}
+.ov{position:absolute;opacity:0;z-index:7}
+#next{left:80px;right:80px;top:430px;background:#FBF6EC;border-radius:40px;padding:46px 50px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+#next .k{display:inline-block;background:#1A1A1A;color:#FF6FA8;font-weight:900;font-size:36px;padding:10px 24px;border-radius:999px}
+#next .t{font-weight:900;font-size:78px;color:#1A1A1A;letter-spacing:-3px;line-height:1.2;margin-top:22px}
+#next .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#prof{left:80px;right:80px;top:720px;background:#FFFFFF;border-radius:44px;padding:48px 50px 50px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:8}
+#prof .row{display:flex;align-items:center;gap:36px}
+#prof .av{position:relative;flex:0 0 190px;height:190px;border-radius:50%;padding:8px;background:conic-gradient(#FF6FA8,#FFD1E3,#FF6FA8)}
+#prof .av div{width:100%;height:100%;border-radius:50%;background:#1A1A1A;border:8px solid #fff;display:flex;align-items:center;justify-content:center;color:#FF6FA8;font-weight:900;font-size:58px;letter-spacing:-2px}
+#prof .nm{font-weight:900;font-size:56px;color:#1A1A1A;letter-spacing:-2px;line-height:1.2}
+#prof .bio{font-weight:600;font-size:36px;color:#8A8274;margin-top:10px;letter-spacing:-1px}
+#prof .fbtn{position:relative;margin-top:40px;height:120px;border-radius:26px;background:#3D7BFF;color:#fff;font-weight:900;font-size:58px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;overflow:hidden}
+#prof .fbtn .on{position:absolute;inset:0;background:#EFEFEF;color:#1A1A1A;display:flex;align-items:center;justify-content:center;opacity:0}
+#tap{position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);border:6px solid #fff;box-shadow:0 0 0 10px rgba(255,111,168,.55),0 10px 30px rgba(0,0,0,.5);opacity:0;z-index:10;left:0;top:0}
+.ring{position:absolute;left:0;top:0;width:150px;height:150px;border-radius:50%;border:8px solid #FF6FA8;opacity:0;z-index:10}
+.heart{position:absolute;font-size:80px;color:#FF6FA8;opacity:0;z-index:10;font-weight:900;text-shadow:0 4px 14px rgba(0,0,0,.5)}
+.endc{top:1270px}
+.big{left:0;right:0;top:470px;text-align:center}
+.big .n{display:inline-block;background:#FF6FA8;color:#111;font-weight:900;font-size:210px;padding:4px 50px;border-radius:36px;letter-spacing:-8px}
+.big .n.s{font-size:150px;letter-spacing:-6px}
+.big .l{display:block;margin-top:24px;color:#fff;font-weight:900;font-size:64px;letter-spacing:-2px;text-shadow:0 4px 20px rgba(0,0,0,.8)}
+#hook{left:60px;right:60px;top:300px;text-align:center;opacity:1;z-index:8}
+#hook .a{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:900;font-size:62px;line-height:1.25;padding:22px 40px;border-radius:30px;letter-spacing:-2px}
+#hook .a b{color:#FF6FA8}
+.tint{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+#cool{background:linear-gradient(180deg,rgba(255,111,168,.35),rgba(60,5,30,.55))}
+#stamp{left:0;right:0;top:520px;text-align:center}
+#stamp span{display:inline-block;border:10px solid #E8664D;color:#E8664D;background:rgba(255,255,255,.9);font-weight:900;font-size:110px;padding:10px 46px;border-radius:30px;letter-spacing:-4px;transform:rotate(-8deg)}
+#obs{left:80px;right:80px;top:440px;background:#FBF6EC;border-radius:36px;padding:44px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+#obs .t{font-weight:900;font-size:64px;color:#1A1A1A;letter-spacing:-2px;line-height:1.3}
+#obs .t span{background:linear-gradient(180deg,transparent 58%,#FF6FA8 58%)}
+#obs .s{font-weight:700;font-size:40px;color:#8A8274;margin-top:16px}
+#label{left:90px;right:90px;top:460px;background:#FBF6EC;border-radius:36px;padding:44px 52px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#label .t{font-weight:900;font-size:46px;color:#1A1A1A;border-bottom:4px solid #1A1A1A;padding-bottom:16px;margin-bottom:22px}
+#label .t span{font-size:30px;font-weight:600;color:#8A8274}
+#label .r{font-weight:700;font-size:46px;color:#4A4438;line-height:1.5}
+#label .mk{font-weight:900;color:#1A1A1A;background:linear-gradient(180deg,transparent 55%,#FF6FA8 55%)}
+.scene.pl{background:radial-gradient(circle at 50% 40%,#5A1838 0%,#1E0712 70%)}
+#obs .g{display:flex;gap:20px;justify-content:center;margin-top:24px}#obs .g div{background:#1A1A1A;color:#FF6FA8;font-weight:900;font-size:44px;padding:14px 26px;border-radius:20px}
+#share{left:60px;right:60px;top:330px;text-align:center}#share span{display:inline-block;background:rgba(0,0,0,.62);color:#fff;font-weight:800;font-size:46px;padding:16px 32px;border-radius:24px;letter-spacing:-1px}#share b{color:#FF6FA8}
+#diets{left:70px;right:70px;top:440px;display:flex;flex-direction:column;gap:22px}#diets .d{background:rgba(251,246,236,.95);border-radius:30px;padding:26px 40px;display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:62px;color:#1A1A1A;letter-spacing:-2px;opacity:0}#diets .d small{font-size:38px;font-weight:700;color:#8A8274}#diets .d.k{background:#1A1A1A;color:#FF6FA8}#diets .d.k small{color:#CFC6B4}</style></head><body>
+<main id="reel" data-composition-id="r070" data-width="1080" data-height="1920" data-duration="49.5">
+<div class="scene" id="s0"><img src="https://pypl4325.github.io/anon-media/bank/ph-fish-02.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s1"><img src="https://pypl4325.github.io/anon-media/bank/ib002.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s2"><img src="https://pypl4325.github.io/anon-media/bank/ib005.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s3"><img src="https://pypl4325.github.io/anon-media/bank/ib061.jpg" style="object-position:50% 40%"><div class="shade"></div></div>
+<div class="scene" id="s4"><img src="https://pypl4325.github.io/anon-media/bank/ph-medi-01.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene pl" id="s5"></div>
+<div class="scene pl" id="s6"></div>
+<div class="scene pl" id="s7"></div>
+<div class="scene" id="s8"><img src="https://pypl4325.github.io/anon-media/bank/ph-meal-08.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene" id="s9"><img src="https://pypl4325.github.io/anon-media/bank/ph-medi-03.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="scene pl" id="s10"></div>
+<div class="scene pl" id="s11"></div>
+<div class="scene" id="s12"><img src="https://pypl4325.github.io/anon-media/bank/ib067.jpg" style="object-position:50% 35%"><div class="shade"></div></div>
+<div class="scene" id="s13"><img src="https://pypl4325.github.io/anon-media/bank/ph-medi-02.jpg" style="object-position:50% 50%"><div class="shade"></div></div>
+<div class="tint" id="cool"></div>
+<div class="top"><div class="badge">이번 주 건강 이슈 16</div><div class="brand">안온 단백질 연구소</div></div>
+<div class="ov" id="hook"><div class="a">지방간엔 키토가 최고?<br><b>반만 맞아요</b></div></div>
+<div class="ov" id="stamp"><span>세 식단 모두</span></div>
+<div class="ov" id="label"><div class="t">실험 조건 <span>미국 · 출처 ①</span></div><div class="r">지방간·당뇨 전단계 어른<br><span class="mk">42명</span>, 음식 전부 제공</div></div>
+<div class="ov" id="diets"><div class="d k" id="d1">키토 <small>탄수 4%</small></div><div class="d" id="d2">지중해식 <small>탄수 50%</small></div><div class="d" id="d3">저지방 <small>탄수 70%</small></div></div>
+<div class="ov big" id="n1"><div class="n">−67%</div><span class="l">간 지방 · 키토</span></div>
+<div class="ov big" id="n2"><div class="n">−45%</div><span class="l">간 지방 · 지중해식·저지방</span></div>
+<div class="ov big" id="n3"><div class="n">4%</div><span class="l">키토의 탄수화물 · 하루 열량 중</span></div>
+<div class="ov" id="obs"><div class="t">음식을 <span>전부 받아</span> 먹은<br>42명 실험</div><div class="s">혼자 할 때와는 조건이 달라요</div></div>
+<div class="ov big" id="n4"><div class="n">10%</div><span class="l">먼저 정할 감량 목표</span></div>
+<div class="ov big" id="n5"><div class="n">7kg</div><span class="l">70kg이면</span></div>
+<div class="ov big" id="n6"><div class="n">8kg</div><span class="l">80kg이면</span></div>
+<div class="ov" id="share"><span>✈ <b>지방간 걱정하는 친구</b>에게 보내 주세요</span></div>
+<div class="ov" id="next"><div class="k">함께 보면 좋아요</div><div class="t">야식이 간에 남는 이야기,<br><span>프로필</span>에 있어요</div></div>
+<div class="ov" id="prof"><div class="row"><div class="av"><div>안온</div></div><div><div class="nm">안온 단백질 연구소</div><div class="bio">장 볼 때 쓰는 성분 정보</div></div></div><div class="fbtn">+ 팔로우<div class="on">팔로잉 ✓</div></div></div>
+<div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+<div id="tap"></div>
+<div class="heart" id="h1" style="left:760px;top:1020px">♥</div><div class="heart" id="h2" style="left:870px;top:980px">♥</div><div class="heart" id="h3" style="left:620px;top:1000px">♥</div>
+<div class="cap sm" id="c0">지방간엔 <span class='y'>키토</span>가 최고?</div>
+<div class="cap sm" id="c1"><span class='y'>반만</span> 맞아요</div>
+<div class="cap sm" id="c2">살을 똑같이 <span class='y'>10%</span> 빼니</div>
+<div class="cap sm" id="c3"><span class='y'>세 식단</span> 모두</div>
+<div class="cap sm" id="c4">간 지방 <span class='y'>크게</span> 줄었어요</div>
+<div class="cap sm" id="c5">지방간·당뇨 전단계</div>
+<div class="cap sm" id="c6"><span class='y'>42명</span>이</div>
+<div class="cap sm" id="c7">키토·지중해식·저지방</div>
+<div class="cap sm" id="c8"><span class='y'>넉 달</span>쯤 감량</div>
+<div class="cap sm" id="c9">키토 <span class='y'>67%</span></div>
+<div class="cap sm" id="c10">나머지도 <span class='y'>45%</span></div>
+<div class="cap sm" id="c11">키토가 더 줄었지만</div>
+<div class="cap sm" id="c12">탄수화물 <span class='y'>4%</span>뿐</div>
+<div class="cap sm" id="c13">음식을 <span class='y'>전부</span> 받아 먹은</div>
+<div class="cap sm" id="c14"><span class='y'>작은</span> 실험이에요</div>
+<div class="cap sm" id="c15">먼저 정할 건</div>
+<div class="cap sm" id="c16">내 몸무게 <span class='y'>10%</span></div>
+<div class="cap sm" id="c17">70kg이면 <span class='y'>7kg</span></div>
+<div class="cap sm" id="c18">80kg이면 <span class='y'>8kg</span></div>
+<div class="cap sm" id="c19">약 먹는 중이면</div>
+<div class="cap sm" id="c20">의사와 <span class='y'>먼저</span></div>
+<div class="cap sm endc" id="c21">야식과 간 이야기는</div>
+<div class="cap sm endc" id="c22"><span class='y'>프로필</span>에 있어요</div>
+<div class="cap sm endc" id="c23">프로필 눌러 <span class='y'>팔로우</span>!</div>
+<audio id="voice" src="https://raw.githubusercontent.com/pypl4325/anon-media/media/out/v070/r1/voice.mp3" data-start="0" data-duration="49.5" data-volume="1"></audio>
+<audio id="bgm" src="https://pypl4325.github.io/anon-media/bank/bgm-series.mp3" data-start="0" data-duration="49.5" data-volume="0.16"></audio>
+</main>
+<script>
+const tl=gsap.timeline({paused:true});
+const S=[[0, 0, 4.08], [1, 4.08, 6.48], [2, 6.48, 10.0], [3, 10.0, 13.52], [4, 13.52, 18.8], [5, 18.8, 21.6], [6, 21.6, 25.04], [7, 25.04, 29.12], [8, 29.12, 32.16], [9, 32.16, 36.08], [10, 36.08, 38.0], [11, 38.0, 39.84], [12, 39.84, 43.04], [13, 43.04, 49.5]];
+S.forEach(([i,a,b])=>{
+  const id='#s'+i, dir=i%2?1:-1;
+  tl.set(id,{opacity:1},a);
+  if(document.querySelector(id+' img')){
+  tl.fromTo(id+' img',{scale:1.18,xPercent:0},{scale:1.04,duration:0.35,ease:'power3.out'},a);
+  tl.to(id+' img',{scale:1.12,xPercent:dir*2,duration:Math.max(0.1,b-a-0.35),ease:'none'},a+0.35);}
+  if(i<S.length-1) tl.set(id,{opacity:0},b);
+});
+const C=[[0, 0, 2.0], [1, 2.0, 4.08], [2, 4.08, 6.48], [3, 6.48, 7.76], [4, 7.76, 10.0], [5, 10.0, 12.24], [6, 12.24, 13.52], [7, 13.52, 16.88], [8, 16.88, 18.8], [9, 18.8, 21.6], [10, 21.6, 25.04], [11, 25.04, 27.04], [12, 27.04, 29.12], [13, 29.12, 30.72], [14, 30.72, 32.16], [15, 32.16, 33.68], [16, 33.68, 36.08], [17, 36.08, 37.92], [18, 37.92, 39.84], [19, 39.84, 40.96], [20, 40.96, 43.04], [21, 43.04, 44.72], [22, 44.72, 46.16], [23, 46.16, 49.5]];
+C.forEach(([i,a,b],k)=>{
+  const el='#c'+i;
+  if(k===0) tl.set(el,{autoAlpha:1,scale:1},0); else tl.fromTo(el,{autoAlpha:0,scale:0.8,y:20},{autoAlpha:1,scale:1,y:0,duration:0.14,ease:'back.out(2.5)'},a);
+  if(k<C.length-1) tl.set(el,{autoAlpha:0},b);
+});
+const pop=(id,a,b)=>tl.fromTo(id,{autoAlpha:0,scale:2.2},{autoAlpha:1,scale:1,duration:0.3,ease:'power4.out'},a).set(id,{autoAlpha:0},b);
+tl.set('#hook',{autoAlpha:1},0).to('#hook',{scale:1.06,duration:0.25,yoyo:true,repeat:1},0.3).to('#hook',{autoAlpha:0,duration:0.2},3.9);
+tl.fromTo('#stamp',{autoAlpha:0,scale:2.5},{autoAlpha:1,scale:1,duration:0.25,ease:'power4.out'},6.5).set('#stamp',{autoAlpha:0},10.0);
+tl.fromTo('#label',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},10.1).set('#label',{autoAlpha:0},13.52);
+tl.set('#diets',{autoAlpha:1},13.52);
+[['#d1',13.52],['#d2',14.24],['#d3',15.2]].forEach(([d,t])=>tl.fromTo(d,{autoAlpha:0,x:-120},{autoAlpha:1,x:0,duration:0.3,ease:'back.out(1.8)'},t));
+tl.to('#diets',{y:-30,duration:2,ease:'none'},16.0).set('#diets',{autoAlpha:0},18.8);
+pop('#n1',18.85,21.6); pop('#n2',21.65,25.04);
+tl.to('#cool',{opacity:1,duration:0.4},25.04).set('#cool',{opacity:0},29.12);
+pop('#n3',27.04,29.12);
+tl.fromTo('#obs',{autoAlpha:0,y:80},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.6)'},29.2).set('#obs',{autoAlpha:0},32.16);
+pop('#n4',34.5,36.08); pop('#n5',36.1,38.0); pop('#n6',38.0,39.84);
+tl.fromTo('#share',{autoAlpha:0,y:-40},{autoAlpha:1,y:0,duration:0.3,ease:'back.out(1.8)'},43.1).to('#share',{autoAlpha:0,duration:0.25},46.0);
+tl.fromTo('#next',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,duration:0.35,ease:'back.out(1.8)'},43.1);
+const E=46.0;
+tl.to('#next',{y:-200,scale:0.8,duration:0.4,ease:'power2.inOut'},E);
+tl.fromTo('#prof',{autoAlpha:0,y:140,scale:0.8},{autoAlpha:1,y:0,scale:1,duration:0.4,ease:'back.out(1.8)'},E);
+tl.set('#tap',{x:560,y:1500,scale:1},E+0.4).to('#tap',{autoAlpha:1,duration:0.15},E+0.4);
+tl.to('#tap',{x:150,y:788,duration:0.4,ease:'power2.out'},E+0.45);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+0.85);
+tl.set('#r1',{x:150,y:788,scale:0.6,autoAlpha:1},E+0.9).to('#r1',{scale:2.2,autoAlpha:0,duration:0.5,ease:'power2.out'},E+0.9);
+tl.to('#prof .av',{scale:1.08,duration:0.12,yoyo:true,repeat:1},E+0.9);
+tl.to('#tap',{x:465,y:983,duration:0.45,ease:'power2.inOut'},E+1.3);
+tl.to('#prof .fbtn',{scale:1.06,duration:0.25,yoyo:true,repeat:1,ease:'sine.inOut'},E+1.3);
+tl.to('#tap',{scale:0.75,duration:0.12,yoyo:true,repeat:1},E+1.8);
+tl.set('#r2',{x:465,y:983,scale:0.6,autoAlpha:1},E+1.85).to('#r2',{scale:2.6,autoAlpha:0,duration:0.55,ease:'power2.out'},E+1.85);
+tl.to('#prof .fbtn .on',{autoAlpha:1,duration:0.12},E+1.9);
+[['#h1',E+1.95],['#h2',E+2.1],['#h3',E+2.25]].forEach(([h,t])=>tl.fromTo(h,{autoAlpha:0,y:0,scale:0.5},{autoAlpha:1,y:-160,scale:1.2,duration:0.6,ease:'power2.out'},t).to(h,{autoAlpha:0,duration:0.3},t+0.6));
+tl.to('#tap',{autoAlpha:0,duration:0.25},E+2.8);
+tl.set({},{},49.5);
+window.__timelines=window.__timelines||{};
+window.__timelines.r070=tl;
+</script>
+</body></html>
