@@ -1,0 +1,30 @@
+{
+ "id": "bank-20261104",
+ "rev": 1,
+ "kind": "bank",
+ "status": "done",
+ "startedAt": "2026-11-04T23:47:05+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "bank": [
+  {
+   "name": "test-linkfarm-01",
+   "url": "https://pypl4325.github.io/anon-media/bank/test-linkfarm-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/test-linkfarm-01_540.jpg",
+   "w": 1152,
+   "h": 2048,
+   "bytes": 159177,
+   "tags": [
+    "시험"
+   ],
+   "prompt": "",
+   "source": "linkfarm gpt-image-2.5-sunburst low",
+   "job": "bank-20261104",
+   "at": "2026-11-04T23:47:07+09:00"
+  }
+ ],
+ "bankIndex": "https://pypl4325.github.io/anon-media/bank/index.json",
+ "doneAt": "2026-11-04T23:47:07+09:00",
+ "sec": 2
+}

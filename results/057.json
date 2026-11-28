@@ -1,0 +1,46 @@
+{
+ "id": "057",
+ "rev": 1,
+ "kind": "render",
+ "status": "done",
+ "startedAt": "2026-11-14T10:48:49+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "cards": [
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_01.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_02.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_03.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_04.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_05.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_06.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_07.png",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_08.png"
+ ],
+ "thumbs": [
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_01_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_02_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_03_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_04_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_05_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_06_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_07_720.jpg",
+  "https://pypl4325.github.io/anon-media/out/057/r1/card_08_720.jpg"
+ ],
+ "cardsSheet": "https://pypl4325.github.io/anon-media/out/057/r1/cards_sheet.jpg",
+ "cardReel": {
+  "url": "https://pypl4325.github.io/anon-media/out/057/r1/card_reel.mp4",
+  "sec": 22.38,
+  "bytes": 2832834,
+  "sheet": "https://pypl4325.github.io/anon-media/out/057/r1/card_reel_sheet.jpg"
+ },
+ "reel": {
+  "url": "https://pypl4325.github.io/anon-media/out/057/r1/reel.mp4",
+  "sec": 49.6,
+  "bytes": 11731515,
+  "sheet": "https://pypl4325.github.io/anon-media/out/057/r1/reel_sheet.jpg",
+  "renderSec": 131
+ },
+ "doneAt": "2026-11-14T10:51:56+09:00",
+ "sec": 186
+}

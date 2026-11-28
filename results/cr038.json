@@ -1,0 +1,18 @@
+{
+ "id": "cr038",
+ "rev": 1,
+ "kind": "cardreel",
+ "status": "done",
+ "startedAt": "2026-11-05T00:53:21+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "cardReel": {
+  "url": "https://pypl4325.github.io/anon-media/out/cr038/r1/card_reel.mp4",
+  "sec": 22.4,
+  "bytes": 2756197,
+  "sheet": "https://pypl4325.github.io/anon-media/out/cr038/r1/card_reel_sheet.jpg"
+ },
+ "doneAt": "2026-11-05T00:54:15+09:00",
+ "sec": 54
+}

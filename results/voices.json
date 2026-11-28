@@ -1,0 +1,159 @@
+{
+ "id": "voices",
+ "rev": 1,
+ "kind": "voices",
+ "status": "done",
+ "startedAt": "2026-10-30T23:36:23+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "voices": [
+  {
+   "name": "Roger - Laid-Back, Casual, Resonant",
+   "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+   "category": "premade"
+  },
+  {
+   "name": "Sarah - Mature, Reassuring, Confident",
+   "voice_id": "EXAVITQu4vr4xnSDxMaL",
+   "category": "premade"
+  },
+  {
+   "name": "Laura - Enthusiast, Quirky Attitude",
+   "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+   "category": "premade"
+  },
+  {
+   "name": "Charlie - Deep, Confident, Energetic",
+   "voice_id": "IKne3meq5aSn9XLyUdCD",
+   "category": "premade"
+  },
+  {
+   "name": "George - Warm, Captivating Storyteller",
+   "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+   "category": "premade"
+  },
+  {
+   "name": "Callum - Husky Trickster",
+   "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+   "category": "premade"
+  },
+  {
+   "name": "River - Relaxed, Neutral, Informative",
+   "voice_id": "SAz9YHcvj6GT2YYXdXww",
+   "category": "premade"
+  },
+  {
+   "name": "Harry - Fierce Warrior",
+   "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+   "category": "premade"
+  },
+  {
+   "name": "Liam - Energetic, Social Media Creator",
+   "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+   "category": "premade"
+  },
+  {
+   "name": "Alice - Clear, Engaging Educator",
+   "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+   "category": "premade"
+  },
+  {
+   "name": "Matilda - Knowledgable, Professional",
+   "voice_id": "XrExE9yKIg1WjnnlVkGX",
+   "category": "premade"
+  },
+  {
+   "name": "Will - Relaxed Optimist",
+   "voice_id": "bIHbv24MWmeRgasZH58o",
+   "category": "premade"
+  },
+  {
+   "name": "Jessica - Playful, Bright, Warm",
+   "voice_id": "cgSgspJ2msm6clMCkdW9",
+   "category": "premade"
+  },
+  {
+   "name": "Eric - Smooth, Trustworthy",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "category": "premade"
+  },
+  {
+   "name": "Bella - Professional, Bright, Warm",
+   "voice_id": "hpp4J3VqNfWAUOO0d1Us",
+   "category": "premade"
+  },
+  {
+   "name": "Chris - Charming, Down-to-Earth",
+   "voice_id": "iP95p4xoKVk53GoZ742B",
+   "category": "premade"
+  },
+  {
+   "name": "Brian - Deep, Resonant and Comforting",
+   "voice_id": "nPczCjzI2devNBz1zQrb",
+   "category": "premade"
+  },
+  {
+   "name": "Daniel - Steady Broadcaster",
+   "voice_id": "onwK4e9ZLuTAKqWW03F9",
+   "category": "premade"
+  },
+  {
+   "name": "Lily - Velvety Actress",
+   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+   "category": "premade"
+  },
+  {
+   "name": "Adam - Dominant, Firm",
+   "voice_id": "pNInz6obpgDQGcFmaJgB",
+   "category": "premade"
+  },
+  {
+   "name": "Bill - Wise, Mature, Balanced",
+   "voice_id": "pqHfZKP75CvOlQylNhV4",
+   "category": "premade"
+  },
+  {
+   "name": "돈의갈림길_진행자",
+   "voice_id": "PtuOam29iy4o7HOQaNNd",
+   "category": "generated"
+  },
+  {
+   "name": "BIN 빈",
+   "voice_id": "jB1Cifc2UQbq1gR3wnb0",
+   "category": "professional"
+  },
+  {
+   "name": "Chang wook 창욱",
+   "voice_id": "ZJCNdZEjYwkOElxugmW2",
+   "category": "professional"
+  },
+  {
+   "name": "안온 진행자",
+   "voice_id": "fZHc5QEMO6PrBSnQ4ez7",
+   "category": "cloned"
+  },
+  {
+   "name": "Hyun Bin 현빈",
+   "voice_id": "s07IwTCOrCDCaETjUVjx",
+   "category": "professional"
+  },
+  {
+   "name": "Yohan Koo - Confident authority, crafted for impact",
+   "voice_id": "4JJwo477JUAx3HV0T7n7",
+   "category": "professional"
+  },
+  {
+   "name": "진건 송",
+   "voice_id": "BbsagRO6ohd8MKPS2Ob0",
+   "category": "professional"
+  },
+  {
+   "name": "Kenzo - Calm, Soft and Measured",
+   "voice_id": "b34JylakFZPlGS0BnwyY",
+   "category": "professional"
+  }
+ ],
+ "doneAt": "2026-10-30T23:36:23+09:00",
+ "sec": 0
+}

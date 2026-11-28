@@ -1,0 +1,1508 @@
+{
+ "id": "bank-photo-20261124",
+ "rev": 1,
+ "kind": "bank",
+ "status": "done",
+ "startedAt": "2026-11-24T15:11:55+09:00",
+ "warn": [],
+ "pagesBase": "https://pypl4325.github.io/anon-media",
+ "rawBase": "https://raw.githubusercontent.com/pypl4325/anon-media/media",
+ "bank": [
+  {
+   "name": "ph-coffee-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-coffee-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-coffee-01_540.jpg",
+   "w": 1440,
+   "h": 1998,
+   "bytes": 253507,
+   "tags": [
+    "실사",
+    "커피",
+    "크리머",
+    "라떼"
+   ],
+   "desc": "아이스커피에 크림 붓는 손",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:56+09:00"
+  },
+  {
+   "name": "ph-coffee-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-coffee-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-coffee-02_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 308533,
+   "tags": [
+    "실사",
+    "커피",
+    "크리머",
+    "우유"
+   ],
+   "desc": "커피에 우유 붓기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:57+09:00"
+  },
+  {
+   "name": "ph-coffee-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-coffee-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-coffee-03_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 296752,
+   "tags": [
+    "실사",
+    "커피",
+    "커피믹스",
+    "스틱"
+   ],
+   "desc": "컵 위 커피 봉지",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:57+09:00"
+  },
+  {
+   "name": "ph-pharmacy-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-pharmacy-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-pharmacy-01_540.jpg",
+   "w": 1440,
+   "h": 1152,
+   "bytes": 333322,
+   "tags": [
+    "실사",
+    "약국",
+    "약사",
+    "상담"
+   ],
+   "desc": "약사가 손님에게 약병을 보여 줌",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:58+09:00"
+  },
+  {
+   "name": "ph-pharmacy-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-pharmacy-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-pharmacy-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 156726,
+   "tags": [
+    "실사",
+    "약국",
+    "약사"
+   ],
+   "desc": "약사가 선반의 약 상자를 꺼냄",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:58+09:00"
+  },
+  {
+   "name": "ph-run-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-01_540.jpg",
+   "w": 1440,
+   "h": 821,
+   "bytes": 131662,
+   "tags": [
+    "실사",
+    "러닝",
+    "달리기",
+    "운동"
+   ],
+   "desc": "물웅덩이에 비친 달리는 다리",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:11:59+09:00"
+  },
+  {
+   "name": "ph-run-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-02_540.jpg",
+   "w": 1440,
+   "h": 2174,
+   "bytes": 534389,
+   "tags": [
+    "실사",
+    "러닝",
+    "러닝화",
+    "운동"
+   ],
+   "desc": "잔디 위 러닝화",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:00+09:00"
+  },
+  {
+   "name": "ph-run-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-03_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 388971,
+   "tags": [
+    "실사",
+    "걷기",
+    "운동",
+    "산책"
+   ],
+   "desc": "풀밭 사이 길을 걷는 사람",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:00+09:00"
+  },
+  {
+   "name": "ph-run-04",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-04.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-04_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 300994,
+   "tags": [
+    "실사",
+    "스트레칭",
+    "무릎",
+    "운동"
+   ],
+   "desc": "매트에서 다리 스트레칭",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:00+09:00"
+  },
+  {
+   "name": "ph-run-05",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-05.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-05_540.jpg",
+   "w": 1440,
+   "h": 1549,
+   "bytes": 714079,
+   "tags": [
+    "실사",
+    "러닝",
+    "달리기",
+    "운동"
+   ],
+   "desc": "물가를 달리는 여성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:01+09:00"
+  },
+  {
+   "name": "ph-run-06",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-06.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-06_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 294756,
+   "tags": [
+    "실사",
+    "러닝",
+    "달리기",
+    "운동"
+   ],
+   "desc": "도시 강변 길을 달리는 여성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:01+09:00"
+  },
+  {
+   "name": "ph-run-07",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-07.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-07_540.jpg",
+   "w": 1440,
+   "h": 2538,
+   "bytes": 504524,
+   "tags": [
+    "실사",
+    "러닝",
+    "달리기",
+    "운동"
+   ],
+   "desc": "길을 달리는 남성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:02+09:00"
+  },
+  {
+   "name": "ph-run-08",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-08.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-08_540.jpg",
+   "w": 1440,
+   "h": 1152,
+   "bytes": 236710,
+   "tags": [
+    "실사",
+    "러닝",
+    "아침",
+    "러닝화",
+    "운동"
+   ],
+   "desc": "바위 위에서 신발 끈 묶기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:03+09:00"
+  },
+  {
+   "name": "ph-run-09",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-run-09.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-run-09_540.jpg",
+   "w": 1440,
+   "h": 1800,
+   "bytes": 368569,
+   "tags": [
+    "실사",
+    "러닝화",
+    "러닝",
+    "운동"
+   ],
+   "desc": "회색 러닝화 한 켤레",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:03+09:00"
+  },
+  {
+   "name": "ph-kimchi-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-kimchi-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-kimchi-01_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 666688,
+   "tags": [
+    "실사",
+    "김치",
+    "배추김치",
+    "반찬",
+    "한식"
+   ],
+   "desc": "김치",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:04+09:00"
+  },
+  {
+   "name": "ph-kimchi-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-kimchi-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-kimchi-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 216998,
+   "tags": [
+    "실사",
+    "김치",
+    "반찬",
+    "한식"
+   ],
+   "desc": "스테인리스 그릇에 담긴 김치",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:05+09:00"
+  },
+  {
+   "name": "ph-banchan-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-banchan-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-banchan-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 317397,
+   "tags": [
+    "실사",
+    "반찬",
+    "김치",
+    "한식",
+    "장보기"
+   ],
+   "desc": "금속 쟁반에 담긴 여러 반찬",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:05+09:00"
+  },
+  {
+   "name": "ph-banchan-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-banchan-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-banchan-02_540.jpg",
+   "w": 1440,
+   "h": 961,
+   "bytes": 364414,
+   "tags": [
+    "실사",
+    "반찬",
+    "한식",
+    "식단"
+   ],
+   "desc": "한식 반찬이 가득한 식탁",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:06+09:00"
+  },
+  {
+   "name": "ph-soda-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-soda-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-soda-01_540.jpg",
+   "w": 1440,
+   "h": 1080,
+   "bytes": 275404,
+   "tags": [
+    "실사",
+    "제로음료",
+    "캔",
+    "탄산"
+   ],
+   "desc": "탄산 캔 여러 개",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:06+09:00"
+  },
+  {
+   "name": "ph-soda-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-soda-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-soda-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 288017,
+   "tags": [
+    "실사",
+    "제로음료",
+    "캔",
+    "탄산"
+   ],
+   "desc": "탄산 캔과 생수병",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:07+09:00"
+  },
+  {
+   "name": "ph-soda-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-soda-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-soda-03_540.jpg",
+   "w": 1440,
+   "h": 950,
+   "bytes": 158198,
+   "tags": [
+    "실사",
+    "캔",
+    "뒷면",
+    "탄산"
+   ],
+   "desc": "캔 가까이",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:07+09:00"
+  },
+  {
+   "name": "ph-soda-04",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-soda-04.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-soda-04_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 146139,
+   "tags": [
+    "실사",
+    "캔",
+    "에너지음료",
+    "탄산"
+   ],
+   "desc": "검은 캔",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:08+09:00"
+  },
+  {
+   "name": "ph-fridge-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-fridge-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-fridge-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 147228,
+   "tags": [
+    "실사",
+    "편의점",
+    "냉장고",
+    "캔",
+    "음료"
+   ],
+   "desc": "냉장고 속 병·캔 음료",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:08+09:00"
+  },
+  {
+   "name": "ph-fridge-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-fridge-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-fridge-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 394097,
+   "tags": [
+    "실사",
+    "편의점",
+    "냉장고",
+    "캔",
+    "음료"
+   ],
+   "desc": "음료 냉장고에서 캔을 꺼내는 사람",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:09+09:00"
+  },
+  {
+   "name": "ph-fridge-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-fridge-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-fridge-03_540.jpg",
+   "w": 1440,
+   "h": 1920,
+   "bytes": 299317,
+   "tags": [
+    "실사",
+    "편의점",
+    "냉장고",
+    "음료"
+   ],
+   "desc": "불 켜진 음료 냉장고 두 대",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:10+09:00"
+  },
+  {
+   "name": "ph-label-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-label-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-label-01_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 503882,
+   "tags": [
+    "실사",
+    "뒷면",
+    "성분표",
+    "장보기"
+   ],
+   "desc": "식품 상자를 들고 보는 여성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:10+09:00"
+  },
+  {
+   "name": "ph-snack-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-snack-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-snack-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 288725,
+   "tags": [
+    "실사",
+    "마트",
+    "장보기",
+    "과자"
+   ],
+   "desc": "식료품 진열대 통로",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:11+09:00"
+  },
+  {
+   "name": "ph-snack-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-snack-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-snack-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 206359,
+   "tags": [
+    "실사",
+    "과자",
+    "간식",
+    "마트"
+   ],
+   "desc": "과자가 가득한 진열대",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:12+09:00"
+  },
+  {
+   "name": "ph-tea-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-tea-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-tea-01_540.jpg",
+   "w": 1440,
+   "h": 2560,
+   "bytes": 352834,
+   "tags": [
+    "실사",
+    "차",
+    "찻잔",
+    "티타임"
+   ],
+   "desc": "나무 탁자 위 김 나는 잔",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:12+09:00"
+  },
+  {
+   "name": "ph-tea-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-tea-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-tea-02_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 350895,
+   "tags": [
+    "실사",
+    "차",
+    "찻잔",
+    "녹차"
+   ],
+   "desc": "나무 탁자 위 유리 찻잔",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:13+09:00"
+  },
+  {
+   "name": "ph-tea-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-tea-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-tea-03_540.jpg",
+   "w": 1440,
+   "h": 1897,
+   "bytes": 100526,
+   "tags": [
+    "실사",
+    "차",
+    "찻주전자",
+    "티타임"
+   ],
+   "desc": "흰 찻잔에 차 따르기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:13+09:00"
+  },
+  {
+   "name": "ph-tea-04",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-tea-04.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-tea-04_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 351328,
+   "tags": [
+    "실사",
+    "차",
+    "찻주전자",
+    "티타임"
+   ],
+   "desc": "검은 찻주전자에서 찻잔으로",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:14+09:00"
+  },
+  {
+   "name": "ph-milk-05",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-milk-05.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-milk-05_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 23279,
+   "tags": [
+    "실사",
+    "우유",
+    "유제품",
+    "아침"
+   ],
+   "desc": "유리잔에 담긴 우유",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:14+09:00"
+  },
+  {
+   "name": "ph-dairy-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-dairy-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-dairy-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 481592,
+   "tags": [
+    "실사",
+    "요거트",
+    "우유",
+    "유제품",
+    "마트"
+   ],
+   "desc": "마트 요거트·우유 진열대",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:15+09:00"
+  },
+  {
+   "name": "ph-cheese-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-cheese-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-cheese-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 162402,
+   "tags": [
+    "실사",
+    "치즈",
+    "유제품",
+    "간식"
+   ],
+   "desc": "도마 위 치즈 한 조각",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:16+09:00"
+  },
+  {
+   "name": "ph-cheese-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-cheese-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-cheese-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 229214,
+   "tags": [
+    "실사",
+    "치즈",
+    "유제품",
+    "간식"
+   ],
+   "desc": "도마 위 썬 치즈",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:16+09:00"
+  },
+  {
+   "name": "ph-gym-07",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-gym-07.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-gym-07_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 132917,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "덤벨"
+   ],
+   "desc": "덤벨을 든 사람",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:16+09:00"
+  },
+  {
+   "name": "ph-gym-08",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-gym-08.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-gym-08_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 147082,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "덤벨",
+    "중년"
+   ],
+   "desc": "헬스장에서 덤벨을 든 남성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:17+09:00"
+  },
+  {
+   "name": "ph-gym-09",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-gym-09.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-gym-09_540.jpg",
+   "w": 1440,
+   "h": 2159,
+   "bytes": 222478,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "덤벨"
+   ],
+   "desc": "헬스장 덤벨 운동",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:18+09:00"
+  },
+  {
+   "name": "ph-gym-10",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-gym-10.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-gym-10_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 223544,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "덤벨",
+    "홈트"
+   ],
+   "desc": "분홍 덤벨을 든 손",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:18+09:00"
+  },
+  {
+   "name": "ph-homefit-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-homefit-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-homefit-01_540.jpg",
+   "w": 1440,
+   "h": 1153,
+   "bytes": 200492,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "홈트"
+   ],
+   "desc": "햇살 든 거실에서 팔굽혀펴기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:19+09:00"
+  },
+  {
+   "name": "ph-homefit-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-homefit-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-homefit-02_540.jpg",
+   "w": 1440,
+   "h": 810,
+   "bytes": 107677,
+   "tags": [
+    "실사",
+    "운동",
+    "근력",
+    "홈트"
+   ],
+   "desc": "요가 매트 위 팔굽혀펴기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:20+09:00"
+  },
+  {
+   "name": "ph-legume-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 541816,
+   "tags": [
+    "실사",
+    "렌틸콩",
+    "콩",
+    "단백질",
+    "식물성"
+   ],
+   "desc": "식탁 위 렌틸콩 그릇",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:21+09:00"
+  },
+  {
+   "name": "ph-legume-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-02_540.jpg",
+   "w": 1440,
+   "h": 1382,
+   "bytes": 431747,
+   "tags": [
+    "실사",
+    "렌틸콩",
+    "콩",
+    "식물성"
+   ],
+   "desc": "작은 갈색 렌틸콩 더미",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:21+09:00"
+  },
+  {
+   "name": "ph-legume-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-03_540.jpg",
+   "w": 1440,
+   "h": 1080,
+   "bytes": 276783,
+   "tags": [
+    "실사",
+    "병아리콩",
+    "콩",
+    "단백질",
+    "식물성"
+   ],
+   "desc": "그릇에 담긴 병아리콩",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:22+09:00"
+  },
+  {
+   "name": "ph-legume-04",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-04.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-04_540.jpg",
+   "w": 1440,
+   "h": 961,
+   "bytes": 107405,
+   "tags": [
+    "실사",
+    "병아리콩",
+    "콩",
+    "식물성"
+   ],
+   "desc": "흰 배경 병아리콩 그릇",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:22+09:00"
+  },
+  {
+   "name": "ph-legume-05",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-05.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-05_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 707213,
+   "tags": [
+    "실사",
+    "콩",
+    "대두",
+    "식물성",
+    "단백질"
+   ],
+   "desc": "콩 가까이",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:23+09:00"
+  },
+  {
+   "name": "ph-legume-06",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-06.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-06_540.jpg",
+   "w": 1440,
+   "h": 1080,
+   "bytes": 279378,
+   "tags": [
+    "실사",
+    "콩",
+    "대두",
+    "식물성"
+   ],
+   "desc": "노란 콩(대두)",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:23+09:00"
+  },
+  {
+   "name": "ph-legume-07",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-legume-07.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-legume-07_540.jpg",
+   "w": 1440,
+   "h": 1805,
+   "bytes": 211231,
+   "tags": [
+    "실사",
+    "콩",
+    "완두",
+    "식물성",
+    "단백질"
+   ],
+   "desc": "여러 가지 마른 콩 여섯 무더기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:24+09:00"
+  },
+  {
+   "name": "ph-travel-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-travel-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-travel-01_540.jpg",
+   "w": 1440,
+   "h": 958,
+   "bytes": 168440,
+   "tags": [
+    "실사",
+    "공항",
+    "여행",
+    "출장"
+   ],
+   "desc": "공항 수하물 벨트 위 가방",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:24+09:00"
+  },
+  {
+   "name": "ph-travel-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-travel-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-travel-02_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 437635,
+   "tags": [
+    "실사",
+    "공항",
+    "여행",
+    "출장"
+   ],
+   "desc": "공항의 은색 여행 가방",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:26+09:00"
+  },
+  {
+   "name": "ph-eye-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-eye-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-eye-01_540.jpg",
+   "w": 1440,
+   "h": 1080,
+   "bytes": 114213,
+   "tags": [
+    "실사",
+    "눈",
+    "피로",
+    "증상"
+   ],
+   "desc": "피곤한 눈의 남성",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:26+09:00"
+  },
+  {
+   "name": "ph-eye-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-eye-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-eye-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 275256,
+   "tags": [
+    "실사",
+    "눈",
+    "시력"
+   ],
+   "desc": "사람 눈 가까이",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:27+09:00"
+  },
+  {
+   "name": "ph-mouse-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-mouse-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-mouse-01_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 454152,
+   "tags": [
+    "실사",
+    "연구",
+    "쥐",
+    "동물실험"
+   ],
+   "desc": "어두운 바닥 위 작은 쥐",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:27+09:00"
+  },
+  {
+   "name": "ph-mouse-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-mouse-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-mouse-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 92449,
+   "tags": [
+    "실사",
+    "연구",
+    "쥐",
+    "동물실험"
+   ],
+   "desc": "나무 탁자 위 쥐",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:27+09:00"
+  },
+  {
+   "name": "ph-grip-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-grip-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-grip-01_540.jpg",
+   "w": 1440,
+   "h": 954,
+   "bytes": 94429,
+   "tags": [
+    "실사",
+    "악력",
+    "근력",
+    "측정"
+   ],
+   "desc": "악력 기구",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:28+09:00"
+  },
+  {
+   "name": "ph-grip-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-grip-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-grip-02_540.jpg",
+   "w": 1440,
+   "h": 1800,
+   "bytes": 505935,
+   "tags": [
+    "실사",
+    "악력",
+    "근력",
+    "손"
+   ],
+   "desc": "손잡이를 꽉 쥔 손",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:28+09:00"
+  },
+  {
+   "name": "ph-senior-06",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-senior-06.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-senior-06_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 719998,
+   "tags": [
+    "실사",
+    "노년",
+    "시니어",
+    "의자"
+   ],
+   "desc": "거실 의자에 앉은 어르신",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:30+09:00"
+  },
+  {
+   "name": "ph-senior-07",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-senior-07.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-senior-07_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 238390,
+   "tags": [
+    "실사",
+    "노년",
+    "시니어",
+    "의자"
+   ],
+   "desc": "소파에 앉은 여성(카디건)",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:30+09:00"
+  },
+  {
+   "name": "ph-shake-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-shake-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-shake-01_540.jpg",
+   "w": 1440,
+   "h": 961,
+   "bytes": 155642,
+   "tags": [
+    "실사",
+    "쉐이크",
+    "쉐이커",
+    "단백질"
+   ],
+   "desc": "흰·검정 쉐이커 텀블러",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:31+09:00"
+  },
+  {
+   "name": "ph-shake-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-shake-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-shake-02_540.jpg",
+   "w": 1440,
+   "h": 961,
+   "bytes": 103293,
+   "tags": [
+    "실사",
+    "쉐이크",
+    "단백질",
+    "음료"
+   ],
+   "desc": "유리잔 속 딸기 쉐이크",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:32+09:00"
+  },
+  {
+   "name": "ph-medi-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-medi-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-medi-01_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 497211,
+   "tags": [
+    "실사",
+    "지중해식",
+    "식단",
+    "올리브유",
+    "채소"
+   ],
+   "desc": "마늘·토마토·치즈·빵·올리브유 재료",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:33+09:00"
+  },
+  {
+   "name": "ph-medi-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-medi-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-medi-02_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 392691,
+   "tags": [
+    "실사",
+    "지중해식",
+    "식단",
+    "채소"
+   ],
+   "desc": "그릇이 놓인 나무 식탁",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:33+09:00"
+  },
+  {
+   "name": "ph-medi-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-medi-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-medi-03_540.jpg",
+   "w": 1440,
+   "h": 980,
+   "bytes": 486219,
+   "tags": [
+    "실사",
+    "식단",
+    "채소",
+    "달걀"
+   ],
+   "desc": "채소·토마토 곁들인 수란 접시",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:34+09:00"
+  },
+  {
+   "name": "ph-alcohol-05",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-05.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-05_540.jpg",
+   "w": 1440,
+   "h": 1800,
+   "bytes": 488193,
+   "tags": [
+    "실사",
+    "술",
+    "와인",
+    "음주",
+    "식사"
+   ],
+   "desc": "피자·파스타 식탁에서 레드 와인 건배",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:35+09:00"
+  },
+  {
+   "name": "ph-alcohol-06",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-06.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-06_540.jpg",
+   "w": 1440,
+   "h": 2159,
+   "bytes": 525993,
+   "tags": [
+    "실사",
+    "술",
+    "와인",
+    "음주"
+   ],
+   "desc": "와인잔에 레드 와인 따르기",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:35+09:00"
+  },
+  {
+   "name": "ph-alcohol-07",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-07.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-alcohol-07_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 511739,
+   "tags": [
+    "실사",
+    "술",
+    "와인",
+    "음주"
+   ],
+   "desc": "레드 와인 한 잔",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:36+09:00"
+  },
+  {
+   "name": "ph-sleep-01",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-sleep-01.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-sleep-01_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 97404,
+   "tags": [
+    "실사",
+    "수면",
+    "잠",
+    "침실",
+    "밤"
+   ],
+   "desc": "침대 옆 켜진 스탠드",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:36+09:00"
+  },
+  {
+   "name": "ph-sleep-02",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-sleep-02.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-sleep-02_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 281661,
+   "tags": [
+    "실사",
+    "수면",
+    "잠",
+    "침실",
+    "밤"
+   ],
+   "desc": "침대 곁 켜진 스탠드",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:37+09:00"
+  },
+  {
+   "name": "ph-sleep-03",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-sleep-03.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-sleep-03_540.jpg",
+   "w": 1440,
+   "h": 1080,
+   "bytes": 220504,
+   "tags": [
+    "실사",
+    "수면",
+    "침실",
+    "밤"
+   ],
+   "desc": "나무 협탁 위 스탠드",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:38+09:00"
+  },
+  {
+   "name": "ph-supplement-08",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-supplement-08.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-supplement-08_540.jpg",
+   "w": 1440,
+   "h": 960,
+   "bytes": 82918,
+   "tags": [
+    "실사",
+    "영양제",
+    "뒷면",
+    "성분표"
+   ],
+   "desc": "흰 라벨 갈색 병",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:38+09:00"
+  },
+  {
+   "name": "ph-supplement-09",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-supplement-09.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-supplement-09_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 193313,
+   "tags": [
+    "실사",
+    "영양제",
+    "캡슐"
+   ],
+   "desc": "빈 라벨 캡슐 병",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:38+09:00"
+  },
+  {
+   "name": "ph-supplement-10",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ph-supplement-10.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ph-supplement-10_540.jpg",
+   "w": 1440,
+   "h": 2160,
+   "bytes": 355336,
+   "tags": [
+    "실사",
+    "영양제",
+    "손"
+   ],
+   "desc": "손에 든 병",
+   "prompt": "",
+   "source": "",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:39+09:00"
+  },
+  {
+   "name": "ib139",
+   "kind": "image",
+   "url": "https://pypl4325.github.io/anon-media/bank/ib139.jpg",
+   "thumb": "https://pypl4325.github.io/anon-media/bank/ib139_540.jpg",
+   "w": 1152,
+   "h": 2048,
+   "bytes": 125962,
+   "tags": [
+    "심장",
+    "두근거림",
+    "카페인",
+    "몸속",
+    "이슈"
+   ],
+   "desc": "회색 후드 반투명 3D 인물이 밤 책상에서 가슴 속 분홍 심장이 뛰는 장면, 라벨 없는 은색 캔(카페인·두근거림)",
+   "prompt": "",
+   "source": "linkfarm gpt-image-2.5-sunburst low",
+   "job": "bank-photo-20261124",
+   "at": "2026-11-24T15:12:40+09:00"
+  }
+ ],
+ "bankIndex": "https://pypl4325.github.io/anon-media/bank/index.json",
+ "doneAt": "2026-11-24T15:12:40+09:00",
+ "sec": 45
+}
